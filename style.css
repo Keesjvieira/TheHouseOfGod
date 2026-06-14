@@ -1419,7 +1419,7 @@ html {
   }
 
   .card-tall1 {
-aspect-ratio: 10 / 5;
+aspect-ratio: 30 / 15;
 width: 100%;
   }
 
@@ -1461,7 +1461,7 @@ width: 100%;
   text-align: center;
   line-height: 1;
   font-family: 'satoshi', sans-serif;
-  padding-top: 30rem
+  padding-top: 20rem
 }
 
 .hero-sub {

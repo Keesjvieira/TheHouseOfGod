@@ -12,7 +12,13 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>emailjs.init("8g-9vlwUf_G9nDcbU");</script>
   </head>
+  
+
+<button id="scrollToGalleryBtn">Gallery</button>
+
 
   <body>
     <!-- Top navigation -->
@@ -27,6 +33,7 @@
     </nav>
 
     <!-- Home page -->
+     
     <main class="page active" id="page-home">
       <section class="hero">
         <h1 class="hero-name">THE HOUSE OF GOD</h1>
@@ -53,7 +60,7 @@
     <section class="page" id="page-about">
       <div class="about-wrap">
         <div class="about-image-col">
-          <article class="media-card"><img src="gray.png">
+          <article class="media-card"><img src="Artboard 8@4x.png">
             <div class="wipe"></div>
             <div class="placeholder">
              <!-- <span class="placeholder-num"></span>
@@ -68,20 +75,30 @@
           <div class="about-divider"></div>
 
           <p class="about-body">
-            The work that I intend to do is one that will serve to help brand owners - those who are truly serious about their brand - to establish something that has value.
+            The work that I intend to do is one that will serve to help brand owners - those who are truly serious about their brand - establish something that has value.
           </p>
           <p class="about-body">
-             Anyone can build a brand, but only some focus on value rather than quick money, money is a by product, value lasts, I will help you to add value to your brand.
+             Anyone can build a brand, but only some focus on value rather than quick money, money is a byproduct, value lasts, I will help you add value to your brand.
           </p>
           <p class="about-body">
             I have a skill, perhaps a gift, a skill is something you practice, a gift is something your born with, you've probably heard the quote "Jack of all trades, master of none", but the real undiluted version finishes it with "but often times better than a master of one".
           </p>
           <p class="about-body">
-             I can't sit long enough to learn one thing, <i>but my heart is set on making clothes</i>, the rest is just a by product to get to the finished product, but I have creative mind and therefore I will act as a creative director for your personal brand.
+             I can't sit long enough to learn one thing, <i>but my heart is set on making clothes</i>, the rest is just a byproduct to get to the finished piece, using my crreative mind I will act as a creative director for your personal brand.
           </p>
+
+          <p class="about-body">
+             I don't want to just sell you a quick service, you can find those people on fiverr or upwork, i'm looking to partner, drag the work as far as needed to help you get to your desireable goal.
+        </p>
+
+        <p class="about-body">
+          If this is what you're looking for then trust me to help you with it, building something that has meaning and value is what truly fulfils and I want to be right in the middle of it.
+        </p>
           <p class="about-body">
             I will help you conceptualize design ideas that fits your brand, and point you in the direction you should go and how you should go about it, the whole nine-yards.
           </p>
+
+          <p clas
 
           <p class="edit-hint">Kees J R Vieira</p>
         </div>
@@ -89,8 +106,10 @@
     </section>
 
     <!-- Gallery page -->
+
+
     <section class="page" id="page-gallery">
-      <header class="gallery-hero">
+      <header class="gallery-hero" id="gallery-grid">
         <h2 class="gallery-title">Collection</h2>
         <p class="gallery-sub">Three seasons &nbsp;·&nbsp; One vision</p>
         <p class="feature"> Featured in</p>
@@ -114,7 +133,7 @@
         </header>
 
         <div class="gallery-grid-main">
-          <article class="media-card card-tall1"><img src="Hat.png">
+          <article class="media-card card-tall1"><img src="Artboard 15_1@4x.png">
             <div class="wipe"></div>
             <div class="placeholder"><span class="placeholder-num">S1</span><span class="placeholder-label">Summer hero</span></div>
           </article>
@@ -129,55 +148,87 @@
         </div>
 
         <div class="gallery-row-3">
-          <article class="media-card card-portrait-tall"><img src="Artboard_18.png">
+          <article class="media-card card-portrait-tall"><img src="Artboard 17@4x.png">
             <div class="wipe"></div>
             <div class="placeholder"><span class="placeholder-num">S4</span><span class="placeholder-label">Editorial</span></div>
           </article>
-          <article class="media-card card-portrait-tall"><img src="Artboard 12@4x.png">
+          <article class="media-card card-portrait-tall"><img src="Artboard 18@4x.png">
             <div class="wipe"></div>
             <div class="placeholder"><span class="placeholder-num">S5</span><span class="placeholder-label">Campaign</span></div>
           </article>
-          <article class="media-card card-portrait-tall"><img src="Artboard_29 1.png">
+          <article class="media-card card-portrait-tall"><img src="Artboard 10@4x.png">
             <div class="wipe"></div>
             <div class="placeholder"><span class="placeholder-num">S6</span><span class="placeholder-label">Fabric</span></div>
           </article>
-          <article class="media-card card-portrait-tall"><img src="orange.png"
+          <article class="media-card card-portrait-tall"><img src="Artboard_8@4x.png"
           </article>-->
         </div>
       </article>
 
       <div class="editorial-grid">
-          <article class="media-card card-tall hero-piece"><img src="white.png">
+          <article class="media-card card-tall hero-piece"><img src="pants.png">
             <div class="wipe"></div>
-            <div class="placeholder"><span class="placeholder-num">01</span><span class="placeholder-label">Hero piece</span></div>
+            <!--<div class="placeholder"><span class="placeholder-num">01</span><span class="placeholder-label">Hero piece</span></div>-->
           </article>
 
-          <article class="media-card card-landscape"><img src="bag.png">
+          <article class="media-card card-landscape"><img src="Artboard 11@4x.png">
             <div class="wipe"></div>
             <div class="placeholder"><span class="placeholder-num">02</span><span class="placeholder-label">Detail</span></div>
           </article>
 
-          <article class="media-card card-landscape"><img src="hat.png">
+          <article class="media-card card-landscape"><img src="Artboard 20@4x.png">
             <div class="wipe"></div>
             <div class="placeholder"><span class="placeholder-num">03</span><span class="placeholder-label">Editorial</span></div>
           </article>
         </div>
 
         <div class="masonry-row">
-          <article class="media-card card-portrait-tall"><img src="Artboard 12@4x.png">
+          <article class="media-card card-portrait-tall"><img src="Artboard 5@4x.png">
             <div class="wipe"></div>
             <div class="placeholder"><span class="placeholder-num">04</span><span class="placeholder-label">Lookbook</span></div>
           </article>
 
-          <article class="media-card card-tall"><img src="Artboard 30@4x.png">
+          <article class="media-card card-tall"><img src="Artboard 1@4x.png">
             <div class="wipe"></div>
             <div class="placeholder">
           </article>
 
-          <article class="media-card card-portrait-tall"><img src="Artboard_29.png">
+          <article class="media-card card-portrait-tall"><img src="Artboard 2@4x.png">
             <div class="wipe"></div>
             <div class="placeholder"><span class="placeholder-num">06</span><span class="placeholder-label">Detail</span></div>
           </article>
+
+          <article class="media-card card-portrait-tall"><img src="Artboard 7@4x.png">
+            <div class="wipe"></div>
+            <div class="placeholder"><span class="placeholder-num">06</span><span class="placeholder-label">Detail</span></div>
+          </article>
+
+           <article class="media-card card-tall"><img src="Artboard 12@4x.png">
+            <div class="wipe"></div>
+            <div class="placeholder">
+          </article>
+
+          <article class="media-card card-portrait-tall"><img src="Artboard 3@4x.png">
+            <div class="wipe"></div>
+            <div class="placeholder"><span class="placeholder-num">04</span><span class="placeholder-label">Lookbook</span></div>
+          </article>
+          
+
+          <article class="media-card card-portrait-tall"><img src="Artboard 4@4x.png">
+            <div class="wipe"></div>
+            <div class="placeholder"><span class="placeholder-num">06</span><span class="placeholder-label">Detail</span></div>
+          </article>
+
+           <article class="media-card card-tall"><img src="Artboard 13@4x.png">
+            <div class="wipe"></div>
+            <div class="placeholder">
+          </article>
+
+          <article class="media-card card-portrait-tall"><img src="Artboard 3@4x.png">
+            <div class="wipe"></div>
+            <div class="placeholder"><span class="placeholder-num">04</span><span class="placeholder-label">Lookbook</span></div>
+          </article>
+
         </div>
       </section>
 
@@ -190,23 +241,23 @@
         <!--<span class="section-label">II &nbsp;— Atelier</span>-->
 
         <div class="portrait-row">
-          <article class="media-card card-portrait-tall"><img src="vest.png">
+          <article class="media-card card-portrait-tall"><img src="Artboard 16@4x.png">
             <div class="wipe"></div>
             <div class="placeholder"><span class="placeholder-num">07</span><span class="placeholder-label">Silhouette</span></div>
           </article>
 
-          <article class="media-card card-portrait-tall"><img src="two2.png">
+          <article class="media-card card-portrait-tall"><img src="brownie.png">
             <div class="wipe"></div>
             <div class="placeholder"><span class="placeholder-num">08</span><span class="placeholder-label">Fabric</span></div>
           </article>
 
           
-          <article class="media-card card-portrait-tall"><img src="navy.png">
+          <article class="media-card card-portrait-tall"><img src="Artboard 14@4x.png">
             <div class="wipe"></div>
             <div class="placeholder"><span class="placeholder-num">09</span><span class="placeholder-label">Campaign</span></div>
           </article>
 
-          <article class="media-card card-portrait-tall"><img src="women.png">
+          <article class="media-card card-portrait-tall"><img src="Artboard 15@4x.png ">
             <div class="wipe"></div>
             <div class="placeholder"><span class="placeholder-num">10</span><span class="placeholder-label">Couture</span></div>
           </article>
@@ -311,6 +362,33 @@
         </div>
       </div>
     </div>
+
+    <!--Contact form-->
+<section class="contact-section">
+  <p class="contact-eyebrow">Get in touch</p>
+  <h2 class="contact-heading">Partner With Me</h2>
+
+  <div class="contact-form">
+    <div class="form-field">
+      <label>Your Name</label>
+      <input type="text" placeholder="Full name" id="cf-name" />
+    </div>
+
+    <div class="form-field">
+      <label>Message</label>
+      <textarea rows="5" placeholder="Tell me, what's on your mind?" id="cf-message"></textarea>
+    </div>
+    <div class="form-field">
+      <label>Email Address</label>
+      <input type="email" placeholder="your@email.com" id="cf-email" />
+    </div>
+
+    <button class="contact-submit" onclick="submitContact()">Contact</button>
+    <p class="contact-confirm" id="cf-confirm">
+      Thank you — your message has been received. I will be in touch.
+    </p>
+  </div>
+</section>
 
       <footer>
         <span>© 2026 Kees J R Vieira</span>

@@ -170,3 +170,51 @@ window.addEventListener('resize', () => {
   }
 });
 
+function submitContact() {
+  const name  = document.getElementById('cf-name').value.trim();
+  const email = document.getElementById('cf-email').value.trim();
+  const msg = document.getElementById('cf-message').value.trim();
+
+  if (!name || !email || !msg) {
+  alert('Please fill in your name, email, and message.');
+  return;
+}
+
+  const btn = document.querySelector('.contact-submit');
+  btn.textContent = 'Sending…';
+  btn.style.opacity = '0.6';
+  btn.disabled = true;
+
+  emailjs.send('portfolio', 'template_ityk0dw', {
+    name: name,
+    email: email,
+    message: msg
+  }).then(() => {
+    document.getElementById('cf-confirm').style.display = 'block';
+    btn.style.display = 'none';
+  }).catch((err) => {
+    alert('Something went wrong. Please try again.');
+    console.error(err);
+    btn.textContent = 'Contact';
+    btn.style.opacity = '1';
+    btn.disabled = false;
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const button = document.getElementById('scrollToGalleryBtn');
+  const gallery = document.getElementById('gallery-grid');
+
+  if (button && gallery) {
+    button.addEventListener('click', (event) => {
+      // 1. Stop the default HTML anchor jump if you are using an <a> tag
+      event.preventDefault(); 
+      
+      // 2. Trigger the smooth animation
+      gallery.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    });
+  }
+});

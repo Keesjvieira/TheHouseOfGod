@@ -345,7 +345,8 @@ section {
 
 
 .card-tall {
-  aspect-ratio: 5 / 6;
+  width: fit-content;
+  height: fit-content;
 }
 
 .card-square {
@@ -1246,4 +1247,144 @@ footer span {
   footer {
     padding: 1.5rem 2vw;
   }
+}
+
+.contact-section {
+  padding: 7rem 4vw;
+  border-top: 0.5px solid rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contact-eyebrow {
+  font-size: 0.6rem;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 1.5rem;
+}
+
+.contact-heading {
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 4rem);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 0.8rem;
+  font-family: 'satoshi', sans-serif;
+  font-weight: bold;
+}
+
+.contact-sub {
+  font-weight: 300;
+  font-style: italic;
+  font-size: 1rem;
+  letter-spacing: 0.12em;
+  color: #888;
+  margin-bottom: 3.5rem;
+  text-align: center;
+}
+
+.contact-form {
+  width: 100%;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+}
+
+.form-field label {
+  font-size: 0.58rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 0.6rem;
+}
+
+.form-field input,
+.form-field textarea {
+  background: transparent;
+  border: none;
+  border-bottom: 0.5px solid rgba(0,0,0,0.25);
+  padding: 0.6rem 0;
+  font-family: 'Cormorant Galatia', serif;
+  font-size: 1rem;
+  color: #0a0a0a;
+  outline: none;
+  resize: none;
+  transition: border-color 0.3s;
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+  border-bottom-color: #0a0a0a;
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+  color: rgba(0,0,0,0.25);
+  font-style: italic;
+}
+
+.contact-submit {
+  align-self: center;
+  margin-top: 1rem;
+  background: #0a0a0a;
+  color: #fffff0;
+  border: none;
+  font-family: 'Cormorant Galatia', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  padding: 1rem 3rem;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.contact-submit:hover {
+  opacity: 0.75;
+}
+
+.contact-confirm {
+  display: none;
+  text-align: center;
+  font-style: italic;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  color: #888;
+  margin-top: 1.5rem;
+}
+
+#scrollToGalleryBtn{
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  font-family: 'Cormorant Galatia', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #fff;
+  border: 0.5px solid #fff;
+  padding: 0.85rem 2.5rem;
+  background: transparent;
+  transition: background 0.35s, color 0.35s;
+  cursor: pointer;
+}
+
+.floating-gallery-btn:hover {
+  background: #fff;
+  color: #0a0a0a;
+}
+
+html {
+  scroll-behavior: smooth !important;
 }

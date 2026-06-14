@@ -1509,7 +1509,8 @@ width: 100%;
   background: var(--black);
 }
 .about-wrap {
-  padding-top: 30rem;
+  margin-top: 30rem;
+  padding-top: 15rem;
   min-height: 100vh;
   display: grid;
   grid-template-columns: 1fr 1fr;

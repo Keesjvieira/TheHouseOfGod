@@ -350,8 +350,6 @@ section {
 .card-tall1 {
   aspect-ratio: 10 / 5;
   width: 100%;
-  border: 10px solid #fbb03b; /* Creates the border line */
-  background-color: #e8e8d8;
 }
 
 .card-square {
@@ -361,9 +359,7 @@ section {
 .card-landscape {
   aspect-ratio: 16 / 9;
   width: 100%;
-  height: auto;        /* Sets box height */
-  border: 10px solid #fbb03b; /* Creates the border line */
-  background-color: #e8e8d8;
+  height: auto;
 }
 
 .card-portrait-tall {
@@ -1423,7 +1419,8 @@ html {
   }
 
   .card-tall1 {
-
+aspect-ratio: 10 / 5;
+width: 100%;
   }
 
   .card-portrait-tall {
@@ -1452,8 +1449,6 @@ html {
    .card-tall1 {
   aspect-ratio: 10 / 5;
   width: 100%;
-  border: 10px solid #fbb03b; /* Creates the border line */
-  background-color: #e8e8d8;
 }
   }
 
@@ -1466,9 +1461,6 @@ html {
   aspect-ratio: 16 / 9;
   width: 100%;
   height: auto;        /* Sets box height */
-  border: 10px solid #fbb03b; /* Creates the border line */
-  background-color: #e8e8d8;
-}
 
   .card-square{
     aspect-ratio: 1 / 1;

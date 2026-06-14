@@ -342,11 +342,14 @@ section {
 .media-card:hover video {
   transform: scale(1.04);
 }
-
-
 .card-tall {
-  width: fit-content;
-  height: fit-content;
+  aspect-ratio: 3 / 4;
+  width: 100%;
+}
+
+.card-tall1 {
+  aspect-ratio: 3 / 4;
+  width: 100%;
 }
 
 .card-square {
@@ -1387,4 +1390,69 @@ footer span {
 
 html {
   scroll-behavior: smooth !important;
+}
+
+
+
+/* Fix image fitting inside all cards on mobile */
+@media (max-width: 768px) {
+  .media-card {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .media-card img,
+  .media-card video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  .card-tall {
+    aspect-ratio: 3 / 4;
+    width: 100%;
+    height: auto;
+  }
+
+  .card-portrait-tall {
+    aspect-ratio: 4 / 5;
+    width: 100%;
+    height: auto;
+  }
+
+  .card-square {
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    height: auto;
+  }
+
+  .card-landscape {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    height: auto;
+  }
+
+/* Same fix for small mobile */
+@media (max-width: 480px) {
+  .card-tall,
+  .card-tall1 {
+    aspect-ratio: 3 / 4;
+    width: 100%;
+    height: auto;
+  }
+
+  .card-portrait-tall {
+    aspect-ratio: 4 / 5;
+    width: 100%;
+    height: auto;
+  }
+
+  .card-square,
+  .card-landscape {
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    height: auto;
+  }
 }

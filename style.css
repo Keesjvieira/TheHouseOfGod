@@ -343,7 +343,7 @@ section {
   transform: scale(1.04);
 }
 .card-tall {
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 4 / 5;
   width: 100%;
 }
 
@@ -358,6 +358,10 @@ section {
 
 .card-landscape {
   aspect-ratio: 16 / 9;
+  width: 100%;
+  height: auto;        /* Sets box height */
+  border: 10px solid #fbb03b; /* Creates the border line */
+  background-color: #e8e8d8;
 }
 
 .card-portrait-tall {
@@ -527,7 +531,7 @@ section {
 }
 
 .feature {
-  ont-weight: 300;
+  font-weight: 300;
   font-family: 'satoshi', sans-serif;
   font-size: 1rem;
   letter-spacing: 0.15em;

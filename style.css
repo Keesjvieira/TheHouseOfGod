@@ -1470,7 +1470,7 @@ width: 100%;
   font-size: clamp(0.9rem, 2vw, 1.1rem);
   letter-spacing: 0.2em;
   color: var(--gray);
-  margin-bottom: 15rem;
+  margin-top: 23rem;
   text-align: center;
 }
 .hero-image-foreground {

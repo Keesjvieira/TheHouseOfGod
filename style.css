@@ -1508,14 +1508,7 @@ width: 100%;
   height: 150px;
   background: var(--black);
 }
-.about-wrap {
-  margin-top: 30rem;
-  padding-top: 15rem;
-  min-height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0;
-}
+
   .card-portrait-tall {
     aspect-ratio: 4 / 5;
     width: 100%;

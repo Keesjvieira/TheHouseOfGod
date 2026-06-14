@@ -1420,7 +1420,8 @@ html {
 
   .card-tall1 {
 aspect-ratio: 30 / 15;
-width: 100%;
+width: fit-content;
+height: fit-content;
   }
 
   .card-portrait-tall {
@@ -1461,7 +1462,7 @@ width: 100%;
   text-align: center;
   line-height: 1;
   font-family: 'satoshi', sans-serif;
-  padding-top: 20rem
+  padding-top: 15rem
 }
 
 .hero-sub {
@@ -1470,7 +1471,7 @@ width: 100%;
   font-size: clamp(0.9rem, 2vw, 1.1rem);
   letter-spacing: 0.2em;
   color: var(--gray);
-  margin-top: 23rem;
+  margin-top: 15rem;
   text-align: center;
 }
 .hero-image-foreground {

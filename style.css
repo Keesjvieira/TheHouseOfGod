@@ -518,7 +518,7 @@ section {
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
   display: flex;         /* or display: grid; */
   flex-direction: column; /* stacks elements vertically */
-  row-gap: 55px;
+  row-gap: 45px;
 }
 
 .gallery-title {
@@ -620,7 +620,7 @@ section {
 
 .season-header {
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
 }
 
 .season-name {

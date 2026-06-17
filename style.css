@@ -338,19 +338,6 @@ section {
   transition: transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.service-title {
-  font-weight: 100;
-  font-size: 20px;
-  margin-bottom: 2rem;
-  font-family: 'Cormorant Galatia', serif;
-  
-}
-
-.highlight {
-  background-color: #FF9A00;
-
-}
-
 .media-card:hover img,
 .media-card:hover video {
   transform: scale(1.04);
@@ -539,6 +526,19 @@ section {
   font-size: clamp(1.8rem, 5vw, 4rem);
   letter-spacing: 0.3em;
   text-transform: uppercase;
+}
+
+.service-title {
+  font-weight: 100;
+  font-size: 20px;
+  margin-bottom: 2rem;
+  font-family: 'Cormorant Galatia', serif;
+  
+}
+
+.highlight {
+  background-color: #FF9A00;
+
 }
 
 .feature {

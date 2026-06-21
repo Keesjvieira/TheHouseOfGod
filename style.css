@@ -1543,19 +1543,3 @@ width: 100%;
     height: auto;
   }
 }
-  
-@media (min-width: 768px) and (max-width: 1024px) {
-  .hero-image-foreground {
-    background-attachment: scroll !important;
-    background-size: cover;
-    background-position: center;
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-  }
-
-  .hero {
-    position: relative;
-    overflow: hidden;
-  }
-}  

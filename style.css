@@ -224,6 +224,7 @@ body {
 
 .edit {
   font-weight: bold;
+  font-family: 'Cormorant Galatia', serif;
 }
 
 @keyframes breathe {

@@ -1543,3 +1543,34 @@ width: 100%;
     height: auto;
   }
 }
+
+  
+/* ===== FINAL FIX: iPad hero image + closing broken media query ===== */
+
+.hero-image-foreground {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: url('https://i.ibb.co/F49xRQk8/6a1203c0992b5a2bca66f780-hero-fg.webp');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  pointer-events: none;
+}
+
+@media screen and (max-width: 1024px) {
+  .hero-image-foreground {
+    background-attachment: scroll !important;
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .hero {
+    position: relative;
+    overflow: hidden;
+  }
+}

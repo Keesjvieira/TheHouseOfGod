@@ -1559,19 +1559,3 @@ width: 100%;
   background-attachment: fixed;
   pointer-events: none;
 }
-
-@media screen and (max-width: 1024px) {
-  .hero-image-foreground {
-    background-attachment: scroll !important;
-    background-size: cover;
-    background-position: center;
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-  }
-
-  .hero {
-    position: relative;
-    overflow: hidden;
-  }
-}

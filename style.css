@@ -137,7 +137,7 @@ body {
   font-size: clamp(0.9rem, 2vw, 1.1rem);
   letter-spacing: 0.2em;
   color: var(--gray);
-  margin-top: 40;
+  margin-top: 40rem;
   text-align: center;
 }
 
@@ -1543,5 +1543,3 @@ width: 100%;
     height: auto;
   }
 }
-
-

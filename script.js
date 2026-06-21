@@ -185,7 +185,7 @@ function submitContact() {
   btn.style.opacity = '0.6';
   btn.disabled = true;
 
-  emailjs.send('portfolio', 'template_ityk0dw', {
+  emailjs.send('service_brzdfxr', 'template_ityk0dw', {
     name: name,
     email: email,
     message: msg

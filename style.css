@@ -222,6 +222,10 @@ body {
   background: var(--black);
 }
 
+.edit {
+  font-weight: bold;
+}
+
 @keyframes breathe {
   0%,
   100% {

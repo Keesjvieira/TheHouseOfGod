@@ -6,6 +6,10 @@
   box-sizing: border-box;
 }
 
+.edit-this {
+  margin-top: 10rem;
+  row-gap: 5rem;
+}
 :root {
   --ivory: #fffff0;
   --black: #0a0a0a;

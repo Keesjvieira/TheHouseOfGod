@@ -227,9 +227,7 @@ body {
   font-family: 'Cormorant Galatia', serif;
 }
 
-.edit-this {
-  margin-top: 5rem;
-}
+
 
 @keyframes breathe {
   0%,
@@ -670,6 +668,7 @@ section {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1.2rem;
+  row-gap: 10rem;
 }
 
 /* Footer */

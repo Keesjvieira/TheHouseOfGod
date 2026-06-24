@@ -7,7 +7,7 @@
 }
 
 .edit-this {
-  margin-top: 10rem;
+  margin-top: 5rem;
   row-gap: 5rem;
 }
 :root {
@@ -672,7 +672,6 @@ section {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1.2rem;
-  row-gap: 10rem;
 }
 
 /* Footer */
@@ -1112,7 +1111,6 @@ footer span {
   .gallery-row-3 {
     grid-template-columns: 1fr 1fr;
     gap: 0.8rem;
-    row-gap: 10rem;
   }
 
   .card-square,

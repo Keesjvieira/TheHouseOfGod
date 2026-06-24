@@ -1108,6 +1108,7 @@ footer span {
   .gallery-row-3 {
     grid-template-columns: 1fr 1fr;
     gap: 0.8rem;
+    row-gap: 10rem;
   }
 
   .card-square,

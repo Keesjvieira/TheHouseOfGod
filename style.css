@@ -1028,16 +1028,18 @@ html {
     font-size: 0.85rem;
   }
 
-  /* About: keep side-by-side like desktop */
+  /* About: stack on phone/tablet — side-by-side was stretching the image */
   .about-wrap {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     padding-top: 0;
     min-height: auto;
-    align-items: stretch;
+    align-items: start;
+    gap: 0;
   }
 
   #page-about {
     padding-top: 0;
+    min-height: auto;
   }
 
   .post-hero-gap {
@@ -1046,36 +1048,46 @@ html {
 
   .about-image-col {
     min-height: 0;
-    display: flex;
+    display: block;
+    width: 100%;
   }
 
   .about-image-col .media-card {
-    flex: 1;
+    display: block;
     width: 100%;
-    min-height: 100%;
-    aspect-ratio: unset;
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 4 / 5;
+    flex: none;
+  }
+
+  .about-image-col .media-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
   }
 
   .about-text-col {
-    padding: 1.25rem 1rem;
-    border-left: 0.5px solid rgba(0, 0, 0, 0.12);
-    border-top: none;
+    padding: 2rem 1.25rem 1.5rem;
+    border-left: none;
+    border-top: 0.5px solid rgba(0, 0, 0, 0.1);
   }
 
   .service-title {
-    font-size: clamp(8px, 2.2vw, 14px);
-    margin-bottom: 0.8rem;
+    font-size: clamp(0.75rem, 3.2vw, 1rem);
+    margin-bottom: 0.9rem;
   }
 
   .about-heading {
-    font-size: clamp(1.2rem, 4.5vw, 2rem);
-    margin-bottom: 0.8rem;
+    font-size: clamp(1.6rem, 6vw, 2.4rem);
+    margin-bottom: 1rem;
   }
 
   .about-body {
-    font-size: clamp(0.68rem, 2.4vw, 0.95rem);
-    line-height: 1.55;
-    margin-bottom: 0.65rem;
+    font-size: clamp(0.95rem, 3.4vw, 1.05rem);
+    line-height: 1.7;
+    margin-bottom: 1rem;
   }
 
   /* Gallery grids: keep desktop column counts */

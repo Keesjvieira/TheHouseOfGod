@@ -143,12 +143,11 @@ body {
 }
 
 .hero-sub {
-  position: absolute;
-  bottom: 2.2%;
-  left: 0;
-  right: 0;
-  z-index: 2;
-  margin: 0;
+  position: static;
+  display: block;
+  width: 100%;
+  margin: 1.25rem 0 0;
+  padding: 0 1rem;
   font-weight: 300;
   font-style: italic;
   font-size: clamp(0.8rem, 2vw, 1.1rem);
@@ -999,7 +998,7 @@ html {
   }
 
   .hero-sub {
-    bottom: 1.6%;
+    margin-top: 1rem;
     font-size: clamp(0.7rem, 3vw, 0.95rem);
   }
 

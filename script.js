@@ -213,7 +213,32 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   initPortraitCarousel();
+  initGalleryRowReveal();
 });
+
+function initGalleryRowReveal() {
+  const cards = document.querySelectorAll('.gallery-row-3 .media-card');
+  if (!cards.length) return;
+
+  if (!('IntersectionObserver' in window)) {
+    cards.forEach((c) => c.classList.add('in-view'));
+    return;
+  }
+
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15, rootMargin: '0px 0px -8% 0px' }
+  );
+
+  cards.forEach((card) => io.observe(card));
+}
 
 function initPortraitCarousel() {
   const root = document.querySelector('[data-portrait-carousel]');

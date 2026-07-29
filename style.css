@@ -337,86 +337,67 @@ section {
   gap: 1.5rem;
 }
 
-/* Portrait carousel (atelier row) */
+/* Portrait carousel (atelier row) — continuous auto-scroll */
 .portrait-carousel {
   position: relative;
   width: 100%;
   margin-top: 0.5rem;
+  --portrait-gap: 1.5rem;
+  --portrait-visible: 3;
+  --portrait-duration: 22s;
 }
 
 .portrait-carousel__viewport {
   overflow: hidden;
   width: 100%;
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 6%,
+    #000 94%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 6%,
+    #000 94%,
+    transparent 100%
+  );
 }
 
 .portrait-carousel .portrait-carousel__track.portrait-row {
   display: flex;
   grid-template-columns: none;
-  gap: 1.5rem;
-  width: 100%;
-  transform: translate3d(0, 0, 0);
-  transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  gap: var(--portrait-gap);
+  width: max-content;
+  animation: portraitScroll var(--portrait-duration) linear infinite;
   will-change: transform;
 }
 
 .portrait-carousel .portrait-carousel__track .media-card {
-  flex: 0 0 calc((100% - 4.5rem) / 4);
+  flex: 0 0
+    calc(
+      (100vw - (var(--portrait-visible) - 1) * var(--portrait-gap) - 8vw) /
+        var(--portrait-visible)
+    );
+  max-width: 380px;
   min-width: 0;
 }
 
-.portrait-carousel__nav {
-  position: absolute;
-  top: 42%;
-  transform: translateY(-50%);
-  z-index: 5;
-  width: 2.4rem;
-  height: 2.4rem;
-  border: 0.5px solid rgba(10, 10, 10, 0.35);
-  background: rgba(255, 255, 240, 0.88);
-  color: var(--black);
-  font-family: 'Cormorant Galatia', serif;
-  font-size: 1.4rem;
-  line-height: 1;
-  cursor: pointer;
-  transition: background 0.3s, color 0.3s, opacity 0.3s;
-  opacity: 0.75;
+@keyframes portraitScroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
 }
 
-.portrait-carousel__nav:hover {
-  background: var(--black);
-  color: var(--ivory);
-  opacity: 1;
-}
-
-.portrait-carousel__nav--prev {
-  left: 0.4rem;
-}
-
-.portrait-carousel__nav--next {
-  right: 0.4rem;
-}
-
-.portrait-carousel__dots {
-  display: flex;
-  justify-content: center;
-  gap: 0.55rem;
-  margin-top: 1.1rem;
-}
-
-.portrait-carousel__dot {
-  width: 6px;
-  height: 6px;
-  padding: 0;
-  border: 0.5px solid rgba(10, 10, 10, 0.45);
-  border-radius: 0;
-  background: transparent;
-  cursor: pointer;
-  transition: background 0.3s, border-color 0.3s;
-}
-
-.portrait-carousel__dot.is-active {
-  background: var(--black);
-  border-color: var(--black);
+@media (prefers-reduced-motion: reduce) {
+  .portrait-carousel .portrait-carousel__track.portrait-row {
+    animation: none;
+  }
 }
 
 .wide-row {
@@ -1200,18 +1181,14 @@ html {
     gap: 0.6rem;
   }
 
-  .portrait-carousel .portrait-carousel__track.portrait-row {
-    gap: 0.75rem;
+  .portrait-carousel {
+    --portrait-gap: 0.75rem;
+    --portrait-visible: 1.6;
+    --portrait-duration: 26s;
   }
 
   .portrait-carousel .portrait-carousel__track .media-card {
-    flex: 0 0 100%;
-  }
-
-  .portrait-carousel__nav {
-    width: 2rem;
-    height: 2rem;
-    font-size: 1.2rem;
+    max-width: 62vw;
   }
 
   .gallery-row-3 {

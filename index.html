@@ -2,7 +2,26 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+      id="viewportMeta"
+    />
+    <script>
+      /* Phones/tablets: lock CSS viewport to desktop width so the computer
+         layout is what renders, then the browser scales it to the screen. */
+      (function () {
+        var meta = document.getElementById('viewportMeta');
+        if (!meta) return;
+        var ua = navigator.userAgent || '';
+        var isMobile = /Mobi|Android|iPhone|iPad|iPod|Mobile|webOS|BlackBerry|IEMobile|Opera Mini/i.test(
+          ua
+        );
+        if (isMobile) {
+          meta.setAttribute('content', 'width=1280');
+        }
+      })();
+    </script>
     <meta name="apple-mobile-web-app-capable" content="true" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="theme-color" content="#fffff0" />

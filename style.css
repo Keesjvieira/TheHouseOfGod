@@ -156,6 +156,27 @@ body {
   text-align: center;
 }
 
+/* Centers the scroll line between .hero-sub and the about image */
+.post-hero-gap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: clamp(14rem, 32vh, 26rem);
+}
+
+.scroll-hint {
+  position: static;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0.35;
+  animation: breathe 2.5s ease-in-out infinite;
+  margin: 0;
+  width: max-content;
+}
+
 .hero-btns {
   display: flex;
   gap: 1.5rem;
@@ -211,18 +232,6 @@ body {
   background-position: center;
   background-attachment: fixed;
   pointer-events: none;
-}
-
-.scroll-hint {
-  position: static;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  opacity: 0.35;
-  animation: breathe 2.5s ease-in-out infinite;
-  margin: 1.5rem auto 0;
-  width: max-content;
 }
 
 .scroll-hint span {
@@ -454,7 +463,7 @@ section {
 
 /* About page */
 .about-wrap {
-  padding-top: 15rem;
+  padding-top: 2rem;
   min-height: 100vh;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1018,9 +1027,13 @@ html {
   /* About: keep side-by-side like desktop */
   .about-wrap {
     grid-template-columns: 1fr 1fr;
-    padding-top: 6rem;
+    padding-top: 1.5rem;
     min-height: auto;
     align-items: stretch;
+  }
+
+  .post-hero-gap {
+    min-height: clamp(10rem, 26vh, 18rem);
   }
 
   .about-image-col {

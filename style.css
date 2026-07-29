@@ -1057,15 +1057,23 @@ html {
     width: 100%;
     height: auto;
     min-height: 0;
-    aspect-ratio: 4 / 5;
+    aspect-ratio: auto;
     flex: none;
+    background: transparent;
   }
 
   .about-image-col .media-card img {
     width: 100%;
-    height: 100%;
+    height: auto;
+    max-height: none;
     object-fit: contain;
     object-position: center;
+    display: block;
+  }
+
+  .about-image-col .media-card .placeholder,
+  .about-image-col .media-card .wipe {
+    display: none;
   }
 
   .about-text-col {

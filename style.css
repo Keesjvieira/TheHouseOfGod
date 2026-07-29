@@ -110,12 +110,14 @@ body {
 /* Hero */
 .hero {
   height: 100vh;
+  height: 100svh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   position: relative;
   isolation: isolate;
+  overflow: hidden;
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.15);
 }
 
@@ -125,29 +127,40 @@ body {
 }
 
 .hero-name {
+  position: absolute;
+  top: 12%;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  margin: 0;
+  padding: 0;
   font-weight: bold;
-  font-size: clamp(2.8rem, 8vw, 7rem);
+  font-size: clamp(2.2rem, 7vw, 7rem);
   text-transform: uppercase;
   text-align: center;
   line-height: 1;
   font-family: 'satoshi', sans-serif;
-  padding-top: 30rem;
 }
 
 .hero-sub {
+  position: absolute;
+  bottom: 2.2%;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  margin: 0;
   font-weight: 300;
   font-style: italic;
-  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  font-size: clamp(0.8rem, 2vw, 1.1rem);
   letter-spacing: 0.2em;
   color: var(--gray);
-  margin-top: 40rem;
   text-align: center;
 }
 
 .hero-btns {
   display: flex;
   gap: 1.5rem;
-  margin-top: 24rem;
+  margin-top: 0;
   align-items: center;
   z-index: 2;
   position: relative;
@@ -202,8 +215,9 @@ body {
 }
 
 .scroll-hint {
+  /* Matches desktop: sits below the first screen */
   position: absolute;
-  top: 55rem;
+  top: 105%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -937,7 +951,7 @@ footer span {
 
 #scrollToGalleryBtn{
   position: absolute;
-  bottom: 2.5rem;
+  bottom: 7%;
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
@@ -963,21 +977,136 @@ html {
   scroll-behavior: smooth !important;
 }
 
-/* Phones use a desktop viewport (see index.html), so layout matches computer.
-   Only touch-specific fixes live here — not layout reflows. */
-@media (hover: none), (max-width: 900px) {
-  .hero-image-foreground {
-    background-attachment: scroll !important;
-  }
-}
-
-@media (hover: none) {
+/* Mobile: same composition as desktop, scaled type/gaps — no reflow to 1-col */
+@media (max-width: 900px) {
   * {
     -webkit-tap-highlight-color: transparent;
   }
 
-  .media-card:hover img,
-  .media-card:hover video {
-    transform: none;
+  body {
+    overflow-x: hidden;
+  }
+
+  .hero-image-foreground {
+    background-attachment: scroll !important;
+    background-position: center 40%;
+  }
+
+  .hero-name {
+    top: 11%;
+    font-size: clamp(1.8rem, 9vw, 3.2rem);
+    padding: 0 0.5rem;
+  }
+
+  .hero-sub {
+    bottom: 1.6%;
+    font-size: clamp(0.7rem, 3vw, 0.95rem);
+  }
+
+  #scrollToGalleryBtn {
+    bottom: 6%;
+    font-size: 0.58rem;
+    padding: 0.7rem 1.8rem;
+  }
+
+  .topnav {
+    padding: 1rem 1.25rem;
+  }
+
+  .topnav-logo {
+    font-size: 0.85rem;
+  }
+
+  /* About: keep side-by-side like desktop */
+  .about-wrap {
+    grid-template-columns: 1fr 1fr;
+    padding-top: 6rem;
+    min-height: auto;
+    align-items: stretch;
+  }
+
+  .about-image-col {
+    min-height: 0;
+    display: flex;
+  }
+
+  .about-image-col .media-card {
+    flex: 1;
+    width: 100%;
+    min-height: 100%;
+    aspect-ratio: unset;
+  }
+
+  .about-text-col {
+    padding: 1.25rem 1rem;
+    border-left: 0.5px solid rgba(0, 0, 0, 0.12);
+    border-top: none;
+  }
+
+  .service-title {
+    font-size: clamp(8px, 2.2vw, 14px);
+    margin-bottom: 0.8rem;
+  }
+
+  .about-heading {
+    font-size: clamp(1.2rem, 4.5vw, 2rem);
+    margin-bottom: 0.8rem;
+  }
+
+  .about-body {
+    font-size: clamp(0.68rem, 2.4vw, 0.95rem);
+    line-height: 1.55;
+    margin-bottom: 0.65rem;
+  }
+
+  /* Gallery grids: keep desktop column counts */
+  .editorial-grid {
+    grid-template-columns: 1.6fr 1fr;
+    gap: 0.6rem;
+  }
+
+  .editorial-grid .hero-piece {
+    grid-row: 1 / 3;
+  }
+
+  .masonry-row {
+    grid-template-columns: 1fr 1.4fr 1fr;
+    gap: 0.6rem;
+  }
+
+  .portrait-row,
+  .gallery-row-3 {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.6rem;
+  }
+
+  .wide-row {
+    grid-template-columns: 1fr 2fr;
+    gap: 0.6rem;
+  }
+
+  .gallery-grid-main {
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 0.6rem;
+  }
+
+  .gallery-row-2 {
+    grid-template-columns: 1fr 1fr 1.5fr;
+    gap: 0.6rem;
+  }
+
+  .media-card img,
+  .media-card video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .covenant {
+    font-size: clamp(1.6rem, 8vw, 3.5rem);
+  }
+
+  section {
+    padding: 3.5rem 3vw 2rem;
   }
 }

@@ -344,7 +344,7 @@ section {
   margin-top: 0.5rem;
   --portrait-gap: 1.5rem;
   --portrait-visible: 3;
-  --portrait-duration: 22s;
+  --portrait-duration: 12s;
 }
 
 .portrait-carousel__viewport {
@@ -1184,7 +1184,7 @@ html {
   .portrait-carousel {
     --portrait-gap: 0.75rem;
     --portrait-visible: 1.6;
-    --portrait-duration: 26s;
+    --portrait-duration: 14s;
   }
 
   .portrait-carousel .portrait-carousel__track .media-card {

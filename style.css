@@ -349,6 +349,58 @@ section {
   overflow: hidden;
   background: #e8e8d8;
   z-index: 0;
+  opacity: 0;
+  transform: translate3d(0, 34px, 0) scale(0.985);
+  transition:
+    opacity 1s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms),
+    transform 1.05s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms),
+    box-shadow 0.55s ease;
+}
+
+.media-card.revealed {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .editorial-grid .media-card.revealed:hover,
+  .masonry-row .media-card.revealed:hover,
+  .portrait-row .media-card.revealed:hover,
+  .gallery-grid-main .media-card.revealed:hover,
+  .gallery-row-2 .media-card.revealed:hover,
+  .wide-row .media-card.revealed:hover,
+  .gallery-row-3 .media-card.revealed:hover {
+    transform: translate3d(0, -6px, 0) scale(1);
+    box-shadow:
+      0 22px 44px rgba(20, 18, 12, 0.14),
+      0 4px 10px rgba(20, 18, 12, 0.06);
+  }
+}
+
+/* Section / text reveal on scroll */
+.reveal-text {
+  opacity: 0;
+  transform: translate3d(0, 22px, 0);
+  transition:
+    opacity 1.05s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1.05s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-text.in-view {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .media-card,
+  .media-card.revealed,
+  .reveal-text,
+  .reveal-text.in-view {
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
 }
 
 

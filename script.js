@@ -67,6 +67,65 @@ function initWipes() {
 
 initWipes();
 
+const GALLERY_GRID_SELECTOR =
+  '.editorial-grid, .masonry-row, .portrait-row, .gallery-grid-main, .gallery-row-2, .wide-row, .gallery-row-3';
+
+function initGalleryStagger() {
+  document.querySelectorAll(GALLERY_GRID_SELECTOR).forEach((grid) => {
+    const cards = grid.querySelectorAll(':scope > .media-card');
+    cards.forEach((card, i) => {
+      if (card.style.getPropertyValue('--reveal-delay')) return;
+      card.style.setProperty('--reveal-delay', `${Math.min(i, 8) * 90}ms`);
+    });
+  });
+}
+
+const TEXT_REVEAL_SELECTORS = [
+  '.gallery-title',
+  '.covenant',
+  '.feature',
+  '.gallery-sub',
+  '.season-name',
+  '.season-desc',
+  '.section-label',
+  '.about-heading',
+  '.service-title',
+  '.about-body',
+  '.hero-sub',
+];
+
+const textRevealObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const delay = Number(el.dataset.revealDelay || 0);
+      window.setTimeout(() => el.classList.add('in-view'), delay);
+      textRevealObserver.unobserve(el);
+    });
+  },
+  { threshold: 0.2 }
+);
+
+function initTextReveals() {
+  document.querySelectorAll(TEXT_REVEAL_SELECTORS.join(',')).forEach((el, i) => {
+    if (el.classList.contains('reveal-text')) return;
+    el.classList.add('reveal-text');
+    const parent = el.parentElement;
+    if (parent) {
+      const siblings = Array.from(parent.children).filter((n) =>
+        n.matches(TEXT_REVEAL_SELECTORS.join(','))
+      );
+      const idx = siblings.indexOf(el);
+      if (idx > 0) el.dataset.revealDelay = String(Math.min(idx, 5) * 90);
+    }
+    textRevealObserver.observe(el);
+  });
+}
+
+initGalleryStagger();
+initTextReveals();
+
 // Lightbox
 function openLightbox(card) {
   const image = card.querySelector('img');

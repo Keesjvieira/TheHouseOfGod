@@ -217,4 +217,89 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+
+  initCardStacks();
+});
+
+/* Deck peek: enough offset to show garments on cards behind white artboards */
+const STACK_LAYOUT = [
+  { x: 0, y: 0, rot: -0.8, scale: 1, opacity: 1 },
+  { x: -18, y: 12, rot: -5.5, scale: 0.96, opacity: 1 },
+  { x: 20, y: 22, rot: 4.8, scale: 0.925, opacity: 1 },
+  { x: -8, y: 34, rot: -3.2, scale: 0.89, opacity: 0.98 },
+];
+
+function isStackViewport() {
+  return window.matchMedia('(max-width: 900px)').matches;
+}
+
+function applyStackOrder(stack, order) {
+  order.forEach((card, index) => {
+    const layout = STACK_LAYOUT[Math.min(index, STACK_LAYOUT.length - 1)];
+    card.dataset.stack = String(index);
+    card.style.setProperty('--stack-i', String(index));
+    card.style.setProperty('--stack-x', `${layout.x}px`);
+    card.style.setProperty('--stack-y', `${layout.y}px`);
+    card.style.setProperty('--stack-rot', `${layout.rot}deg`);
+    card.style.setProperty('--stack-scale', String(layout.scale));
+    card.style.setProperty('--stack-opacity', String(layout.opacity));
+  });
+}
+
+function cycleCardStack(stack) {
+  if (stack.dataset.busy === '1') return;
+  const order = stack._stackOrder;
+  if (!order || order.length < 2) return;
+
+  const front = order[0];
+  stack.dataset.busy = '1';
+  front.classList.add('is-exiting');
+
+  window.setTimeout(() => {
+    front.classList.remove('is-exiting');
+    order.push(order.shift());
+    applyStackOrder(stack, order);
+    stack.dataset.busy = '0';
+  }, 420);
+}
+
+function initCardStacks() {
+  document.querySelectorAll('.gallery-row-3').forEach((stack) => {
+    const cards = Array.from(stack.querySelectorAll(':scope > .media-card')).filter(
+      (card) => card.querySelector('img, video')
+    );
+    if (cards.length < 2) return;
+
+    // Hide empty placeholder-only siblings so they don't sit under the deck
+    Array.from(stack.querySelectorAll(':scope > .media-card'))
+      .filter((card) => !card.querySelector('img, video'))
+      .forEach((card) => {
+        card.style.display = 'none';
+      });
+
+    stack._stackOrder = cards.slice();
+    stack.classList.add('is-stacked');
+    applyStackOrder(stack, stack._stackOrder);
+    // Ensure wipe covers don't leave the deck looking blank
+    cards.forEach((card) => card.classList.add('revealed'));
+
+    stack.addEventListener(
+      'click',
+      (event) => {
+        if (!isStackViewport()) return;
+        const card = event.target.closest('.media-card');
+        if (!card || !stack.contains(card)) return;
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        cycleCardStack(stack);
+      },
+      true
+    );
+  });
+}
+
+window.addEventListener('resize', () => {
+  document.querySelectorAll('.gallery-row-3.is-stacked').forEach((stack) => {
+    if (stack._stackOrder) applyStackOrder(stack, stack._stackOrder);
+  });
 });

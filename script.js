@@ -207,14 +207,50 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (button && gallery) {
     button.addEventListener('click', (event) => {
-      // 1. Stop the default HTML anchor jump if you are using an <a> tag
-      event.preventDefault(); 
-      
-      // 2. Trigger the smooth animation
-      gallery.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-      });
+      event.preventDefault();
+      gallery.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   }
+
+  initPortraitCarousel();
+  initGalleryRowReveal();
 });
+
+function initGalleryRowReveal() {
+  const cards = document.querySelectorAll('.gallery-row-3 .media-card');
+  if (!cards.length) return;
+
+  if (!('IntersectionObserver' in window)) {
+    cards.forEach((c) => c.classList.add('in-view'));
+    return;
+  }
+
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15, rootMargin: '0px 0px -8% 0px' }
+  );
+
+  cards.forEach((card) => io.observe(card));
+}
+
+function initPortraitCarousel() {
+  const root = document.querySelector('[data-portrait-carousel]');
+  if (!root) return;
+  const track = root.querySelector('.portrait-carousel__track');
+  if (!track || track.dataset.duplicated === '1') return;
+
+  const originals = Array.from(track.children);
+  originals.forEach((node) => {
+    const clone = node.cloneNode(true);
+    clone.setAttribute('aria-hidden', 'true');
+    track.appendChild(clone);
+  });
+  track.dataset.duplicated = '1';
+}

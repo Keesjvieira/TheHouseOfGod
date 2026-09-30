@@ -207,14 +207,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (button && gallery) {
     button.addEventListener('click', (event) => {
-      // 1. Stop the default HTML anchor jump if you are using an <a> tag
-      event.preventDefault(); 
-      
-      // 2. Trigger the smooth animation
-      gallery.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-      });
+      event.preventDefault();
+      gallery.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   }
+
+  initPortraitCarousel();
 });
+
+function initPortraitCarousel() {
+  const root = document.querySelector('[data-portrait-carousel]');
+  if (!root) return;
+  const track = root.querySelector('.portrait-carousel__track');
+  if (!track || track.dataset.duplicated === '1') return;
+
+  const originals = Array.from(track.children);
+  originals.forEach((node) => {
+    const clone = node.cloneNode(true);
+    clone.setAttribute('aria-hidden', 'true');
+    track.appendChild(clone);
+  });
+  track.dataset.duplicated = '1';
+}

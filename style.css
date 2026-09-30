@@ -337,6 +337,69 @@ section {
   gap: 1.5rem;
 }
 
+/* Portrait carousel (atelier row) — continuous auto-scroll */
+.portrait-carousel {
+  position: relative;
+  width: 100%;
+  margin-top: 0.5rem;
+  --portrait-gap: 1.5rem;
+  --portrait-visible: 3;
+  --portrait-duration: 12s;
+}
+
+.portrait-carousel__viewport {
+  overflow: hidden;
+  width: 100%;
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 6%,
+    #000 94%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 6%,
+    #000 94%,
+    transparent 100%
+  );
+}
+
+.portrait-carousel .portrait-carousel__track.portrait-row {
+  display: flex;
+  grid-template-columns: none;
+  gap: var(--portrait-gap);
+  width: max-content;
+  animation: portraitScroll var(--portrait-duration) linear infinite;
+  will-change: transform;
+}
+
+.portrait-carousel .portrait-carousel__track .media-card {
+  flex: 0 0
+    calc(
+      (100vw - (var(--portrait-visible) - 1) * var(--portrait-gap) - 8vw) /
+        var(--portrait-visible)
+    );
+  max-width: 380px;
+  min-width: 0;
+}
+
+@keyframes portraitScroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portrait-carousel .portrait-carousel__track.portrait-row {
+    animation: none;
+  }
+}
+
 .wide-row {
   display: grid;
   grid-template-columns: 1fr 2fr;
@@ -1116,6 +1179,16 @@ html {
   .portrait-row {
     grid-template-columns: repeat(4, 1fr);
     gap: 0.6rem;
+  }
+
+  .portrait-carousel {
+    --portrait-gap: 0.75rem;
+    --portrait-visible: 1.6;
+    --portrait-duration: 14s;
+  }
+
+  .portrait-carousel .portrait-carousel__track .media-card {
+    max-width: 62vw;
   }
 
   .gallery-row-3 {

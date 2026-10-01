@@ -1045,6 +1045,9 @@ section {
 .about-image-col {
   position: relative;
   min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /*.about-image-col .media-card {
@@ -1885,19 +1888,17 @@ footer span {
   margin-top: 1.5rem;
 }
 
-#scrollToGalleryBtn{
-  position: absolute;
-  bottom: 7%;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
+#scrollToGalleryBtn {
+  position: static;
+  margin: 1.6rem auto 0;
+  z-index: 2;
   font-family: 'Cormorant Galatia', serif;
   font-size: 0.65rem;
   letter-spacing: 0.4em;
   text-transform: uppercase;
   text-decoration: none;
-  color: #fff;
-  border: 0.5px solid #fff;
+  color: var(--black);
+  border: 0.5px solid var(--black);
   padding: 0.85rem 2.5rem;
   background: transparent;
   transition: background 0.35s, color 0.35s;
@@ -1905,8 +1906,8 @@ footer span {
 }
 
 #scrollToGalleryBtn:hover {
-  background: #fff;
-  color: #0a0a0a;
+  background: var(--black);
+  color: var(--ivory);
 }
 
 html {
@@ -1940,7 +1941,7 @@ html {
   }
 
   #scrollToGalleryBtn {
-    bottom: 6%;
+    margin-top: 1.1rem;
     font-size: 0.58rem;
     padding: 0.7rem 1.8rem;
   }

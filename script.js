@@ -170,8 +170,70 @@ window.addEventListener('resize', () => {
   }
 });
 
-function sendContactEmail(name, email, message) {
-  return emailjs.send('service_brzdfxr', 'template_ityk0dw', { name, email, message });
+function sendContactEmail({ name, email, message, brand = '', socials = '' }) {
+  const details = [
+    brand && `Brand: ${brand}`,
+    socials && `Socials: ${socials}`,
+    message,
+  ]
+    .filter(Boolean)
+    .join('\n\n');
+
+  return emailjs.send('service_brzdfxr', 'template_ityk0dw', {
+    name,
+    email,
+    message: details,
+    brand,
+    socials,
+  });
+}
+
+function bindPaperForm(form, { required = [] } = {}) {
+  if (!form) return;
+
+  const submit = form.querySelector('.paper-dialog-submit');
+  const fields = Object.fromEntries(
+    [...form.querySelectorAll('input, textarea')].map((el) => [el.id.replace(/^pf-/, ''), el])
+  );
+
+  Object.values(fields).forEach((field) =>
+    field.addEventListener('input', () => field.closest('.form-field')?.classList.remove('is-invalid'))
+  );
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const keys = required.length ? required : Object.keys(fields);
+    const invalid = keys
+      .map((key) => fields[key])
+      .filter((field) => field && (!field.value.trim() || !field.checkValidity()));
+    invalid.forEach((field) => field.closest('.form-field')?.classList.add('is-invalid'));
+    if (invalid.length) {
+      invalid[0].focus();
+      return;
+    }
+
+    submit.disabled = true;
+    submit.textContent = 'Sending…';
+    sendContactEmail({
+      name: fields.name?.value.trim() || '',
+      email: fields.email?.value.trim() || '',
+      message: fields.message?.value.trim() || '',
+      brand: fields.brand?.value.trim() || '',
+      socials: fields.socials?.value.trim() || '',
+    })
+      .then(() => {
+        form.classList.add('is-sent');
+        form.reset();
+      })
+      .catch((err) => {
+        console.error(err);
+        alert('Something went wrong. Please try again.');
+      })
+      .finally(() => {
+        submit.disabled = false;
+        submit.textContent = 'Send';
+      });
+  });
 }
 
 function initContactDialog() {
@@ -181,19 +243,14 @@ function initContactDialog() {
   if (!dialog || !opener || !form || typeof dialog.showModal !== 'function') return;
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const submit = form.querySelector('.paper-dialog-submit');
-  const fields = {
-    name: getEl('pf-name'),
-    email: getEl('pf-email'),
-    message: getEl('pf-message'),
-  };
+  const nameField = getEl('pf-name');
 
   const open = () => {
     dialog.classList.remove('is-closing');
     form.classList.remove('is-sent');
     dialog.showModal();
     document.documentElement.classList.add('has-dialog');
-    if (window.matchMedia('(pointer: fine)').matches) fields.name.focus();
+    if (window.matchMedia('(pointer: fine)').matches) nameField?.focus();
   };
 
   const close = () => {
@@ -221,34 +278,12 @@ function initContactDialog() {
     if (event.target === dialog || event.target.closest('[data-close-dialog]')) close();
   });
 
-  Object.values(fields).forEach((field) =>
-    field.addEventListener('input', () => field.closest('.form-field').classList.remove('is-invalid'))
-  );
+  bindPaperForm(form, { required: ['name', 'email', 'message'] });
+}
 
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const invalid = Object.values(fields).filter((field) => !field.value.trim() || !field.checkValidity());
-    invalid.forEach((field) => field.closest('.form-field').classList.add('is-invalid'));
-    if (invalid.length) {
-      invalid[0].focus();
-      return;
-    }
-
-    submit.disabled = true;
-    submit.textContent = 'Sending…';
-    sendContactEmail(fields.name.value.trim(), fields.email.value.trim(), fields.message.value.trim())
-      .then(() => {
-        form.classList.add('is-sent');
-        form.reset();
-      })
-      .catch((err) => {
-        console.error(err);
-        alert('Something went wrong. Please try again.');
-      })
-      .finally(() => {
-        submit.disabled = false;
-        submit.textContent = 'Send';
-      });
+function initPartnerLandingForm() {
+  bindPaperForm(getEl('partnerContactForm'), {
+    required: ['name', 'email', 'brand', 'socials', 'message'],
   });
 }
 
@@ -267,7 +302,7 @@ function submitContact() {
   btn.style.opacity = '0.6';
   btn.disabled = true;
 
-  sendContactEmail(name, email, msg).then(() => {
+  sendContactEmail({ name, email, message: msg }).then(() => {
     document.getElementById('cf-confirm').style.display = 'block';
     btn.style.display = 'none';
   }).catch((err) => {
@@ -316,6 +351,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   initContactDialog();
+  initPartnerLandingForm();
 
   document.querySelectorAll('.masonry-carousel').forEach(initCarousel);
   document.querySelectorAll('.paper-deck').forEach(initPaperDeck);

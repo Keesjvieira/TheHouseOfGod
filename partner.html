@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#fffff0" />
+    <meta name="robots" content="noindex" />
+    <title>Partner — THE HOUSE OF GOD</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Galatia:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>emailjs.init("8g-9vlwUf_G9nDcbU");</script>
+  </head>
+  <body class="paper-landing">
+    <svg class="paper-filters" width="0" height="0" aria-hidden="true" focusable="false">
+      <filter id="paper-torn" x="-15%" y="-15%" width="130%" height="130%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="4" seed="7" result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="22" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+      <filter id="paper-torn-fibre" x="-15%" y="-15%" width="130%" height="130%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.06" numOctaves="5" seed="12" result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="30" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+      <filter id="paper-torn-back" x="-15%" y="-15%" width="130%" height="130%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.025" numOctaves="3" seed="3" result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="26" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+    </svg>
+
+    <header class="paper-landing-brand">
+      <a href="index.html" class="paper-landing-mark">בֵּית אֱלֹהִים</a>
+      <p class="paper-landing-name">THE HOUSE OF GOD</p>
+    </header>
+
+    <main class="paper-landing-main">
+      <div class="paper-dialog-card paper-landing-card">
+        <span class="hero-cta-layer hero-cta-layer--back" aria-hidden="true"></span>
+        <span class="hero-cta-layer hero-cta-layer--fibre" aria-hidden="true"></span>
+        <span class="hero-cta-layer hero-cta-layer--sheet" aria-hidden="true"></span>
+        <span class="hero-cta-tape" aria-hidden="true"></span>
+
+        <form class="paper-dialog-form" id="partnerContactForm" novalidate>
+          <p class="paper-dialog-eyebrow">Private invite</p>
+          <h1 class="paper-dialog-title" id="partnerFormTitle">Let's make something <em>worth wearing</em></h1>
+
+          <div class="form-field">
+            <label for="pf-name">Your Name</label>
+            <input type="text" placeholder="Full name" id="pf-name" autocomplete="name" required />
+          </div>
+          <div class="form-field">
+            <label for="pf-email">Email Address</label>
+            <input type="email" placeholder="your@email.com" id="pf-email" autocomplete="email" required />
+          </div>
+          <div class="form-field">
+            <label for="pf-brand">Brand Name</label>
+            <input type="text" placeholder="Your brand" id="pf-brand" autocomplete="organization" required />
+          </div>
+          <div class="form-field">
+            <label for="pf-socials">Socials</label>
+            <input type="text" placeholder="@handle or profile link" id="pf-socials" required />
+          </div>
+          <div class="form-field">
+            <label for="pf-message">Message</label>
+            <textarea rows="3" placeholder="What are you looking to create?" id="pf-message" required></textarea>
+          </div>
+
+          <button type="submit" class="hero-cta-btn paper-dialog-submit">Send</button>
+          <p class="paper-dialog-confirm" role="status">Thank you — your message has been received. I will be in touch.</p>
+        </form>
+      </div>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

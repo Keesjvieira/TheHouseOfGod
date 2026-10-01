@@ -705,6 +705,17 @@ html.has-dialog {
   margin-bottom: 1.35rem;
 }
 
+/* Labels on tan paper need darker gray — #888 disappears into the sheet */
+.paper-dialog-form .form-field label,
+.paper-dialog-form .paper-dialog-eyebrow {
+  color: #3f382e;
+}
+
+.paper-dialog-form .form-field input::placeholder,
+.paper-dialog-form .form-field textarea::placeholder {
+  color: rgba(40, 34, 24, 0.45);
+}
+
 @media (max-width: 900px) {
   .paper-landing-brand {
     padding-top: 1.6rem;

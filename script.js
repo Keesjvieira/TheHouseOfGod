@@ -218,6 +218,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  const heroCard = document.querySelector('.hero-cta-card');
+  const heroTilt = heroCard?.querySelector('.hero-cta-tilt');
+  const canTilt =
+    window.matchMedia('(hover: hover) and (pointer: fine)').matches &&
+    !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (heroCard && heroTilt && canTilt) {
+    heroCard.addEventListener('pointermove', (event) => {
+      const rect = heroCard.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width - 0.5;
+      const y = (event.clientY - rect.top) / rect.height - 0.5;
+      heroTilt.style.setProperty('--tilt-y', `${(x * 10).toFixed(2)}deg`);
+      heroTilt.style.setProperty('--tilt-x', `${(-y * 8).toFixed(2)}deg`);
+    });
+    heroCard.addEventListener('pointerleave', () => {
+      heroTilt.style.setProperty('--tilt-x', '0deg');
+      heroTilt.style.setProperty('--tilt-y', '0deg');
+    });
+  }
+
   const contactBtn = document.getElementById('scrollToContactBtn');
   const contact = document.getElementById('contact');
   if (contactBtn && contact) {

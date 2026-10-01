@@ -49,11 +49,35 @@
 
         <div class="hero-image-foreground" aria-hidden="true"></div>
 
+        <svg class="paper-filters" width="0" height="0" aria-hidden="true" focusable="false">
+          <filter id="paper-torn" x="-15%" y="-15%" width="130%" height="130%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="4" seed="7" result="noise" />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="22" xChannelSelector="R" yChannelSelector="G" />
+          </filter>
+          <filter id="paper-torn-fibre" x="-15%" y="-15%" width="130%" height="130%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.06" numOctaves="5" seed="12" result="noise" />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="30" xChannelSelector="R" yChannelSelector="G" />
+          </filter>
+          <filter id="paper-torn-back" x="-15%" y="-15%" width="130%" height="130%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.025" numOctaves="3" seed="3" result="noise" />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="26" xChannelSelector="R" yChannelSelector="G" />
+          </filter>
+        </svg>
+
         <aside class="hero-cta-card" aria-label="Partner with me">
-          <p class="hero-cta-eyebrow">Available for brands</p>
-          <h2 class="hero-cta-title">Partner with me</h2>
-          <p class="hero-cta-body">Personal design and creative direction for maisons ready to move.</p>
-          <button type="button" class="hero-cta-btn" id="scrollToContactBtn">Get in touch</button>
+          <div class="hero-cta-tilt">
+            <span class="hero-cta-layer hero-cta-layer--back" aria-hidden="true"></span>
+            <span class="hero-cta-layer hero-cta-layer--fibre" aria-hidden="true"></span>
+            <span class="hero-cta-layer hero-cta-layer--sheet" aria-hidden="true"></span>
+            <span class="hero-cta-tape" aria-hidden="true"></span>
+
+            <div class="hero-cta-content">
+              <p class="hero-cta-eyebrow">Available for brands</p>
+              <h2 class="hero-cta-title">Partner<br /><em>with me</em></h2>
+              <p class="hero-cta-body">Personal design and creative direction for maisons ready to move.</p>
+              <button type="button" class="hero-cta-btn" id="scrollToContactBtn">Get in touch</button>
+            </div>
+          </div>
         </aside>
 
         <button id="scrollToGalleryBtn">Gallery</button>

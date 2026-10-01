@@ -341,9 +341,9 @@ body {
 
 .hero-cta-logo {
   display: block;
-  width: clamp(4.5rem, 8vw, 6.25rem);
+  width: clamp(2.75rem, 4.5vw, 3.5rem);
   height: auto;
-  margin: 0 auto 0.35rem;
+  margin: 0 auto 0.15rem;
   object-fit: contain;
   pointer-events: none;
   user-select: none;
@@ -1248,8 +1248,8 @@ html {
   }
 
   .hero-cta-logo {
-    width: 4rem;
-    margin-bottom: 0.15rem;
+    width: 2.6rem;
+    margin-bottom: 0.1rem;
   }
 
   .hero-cta-title {

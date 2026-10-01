@@ -342,9 +342,9 @@ body {
 
 .hero-cta-logo {
   display: block;
-  width: 2.5rem;
+  width: clamp(3.75rem, 6.5vw, 4.75rem);
   height: auto;
-  margin: 0 auto 0.15rem;
+  margin: 0 auto 0.35rem;
   object-fit: contain;
   pointer-events: none;
   user-select: none;

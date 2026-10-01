@@ -359,7 +359,7 @@ body {
 }
 
 .hero-cta-title {
-  margin: 0;
+  margin: -0.35rem 0 0;
   width: 100%;
   max-width: none;
   font-family: 'Cormorant Galatia', serif;

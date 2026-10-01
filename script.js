@@ -247,7 +247,136 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   document.querySelectorAll('.masonry-carousel').forEach(initCarousel);
+  document.querySelectorAll('.paper-deck').forEach(initPaperDeck);
 });
+
+function initPaperDeck(deck) {
+  const stack = deck.querySelector('.paper-deck-stack');
+  const cards = [...stack.children];
+  const total = cards.length;
+  if (total < 2) return;
+
+  const counter = deck.querySelector('.paper-deck-count');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const interval = Number(deck.dataset.interval) || 3600;
+  const firstDelay = interval + (Number(deck.dataset.delay) || 0);
+  const flyMs = reduceMotion ? 20 : 600;
+  const pad = (n) => String(n).padStart(2, '0');
+
+  let order = cards.map((_, i) => i);
+  let busy = false;
+  let timer = null;
+  let firstCycle = true;
+  const pauses = new Set(reduceMotion ? ['reduced-motion'] : []);
+
+  const top = () => cards[order[0]];
+
+  const render = () => {
+    order.forEach((cardIndex, pos) => {
+      const card = cards[cardIndex];
+      card.style.setProperty('--pos', pos);
+      card.classList.toggle('is-top', pos === 0);
+      card.setAttribute('aria-hidden', String(pos !== 0));
+    });
+    if (counter) counter.textContent = `${pad(order[0] + 1)} / ${pad(total)}`;
+  };
+
+  const schedule = () => {
+    clearTimeout(timer);
+    const playing = pauses.size === 0;
+    const wait = firstCycle ? firstDelay : interval;
+    deck.style.setProperty('--interval', `${wait}ms`);
+    deck.classList.remove('is-playing');
+    if (!playing) return;
+    void deck.offsetWidth;
+    deck.classList.add('is-playing');
+    timer = setTimeout(() => advance(-1), wait);
+  };
+
+  const resetDrag = (card) => {
+    card.style.setProperty('--drag-x', '0px');
+    card.style.setProperty('--drag-rot', '0deg');
+  };
+
+  function advance(dir) {
+    if (busy) return;
+    busy = true;
+    firstCycle = false;
+    const leaving = top();
+    leaving.style.setProperty('--dir', dir);
+    leaving.classList.add('is-leaving');
+    order = [...order.slice(1), order[0]];
+    render();
+    setTimeout(() => {
+      leaving.classList.remove('is-leaving');
+      resetDrag(leaving);
+      busy = false;
+    }, flyMs);
+    schedule();
+  }
+
+  let startX = 0;
+  let dragX = 0;
+  let dragging = false;
+
+  stack.addEventListener('pointerdown', (event) => {
+    if (busy || event.button !== 0) return;
+    dragging = true;
+    startX = event.clientX;
+    dragX = 0;
+    stack.setPointerCapture(event.pointerId);
+    deck.classList.add('is-dragging');
+    pauses.add('drag');
+    schedule();
+  });
+
+  stack.addEventListener('pointermove', (event) => {
+    if (!dragging) return;
+    dragX = event.clientX - startX;
+    top().style.setProperty('--drag-x', `${dragX}px`);
+    top().style.setProperty('--drag-rot', `${dragX * 0.05}deg`);
+  });
+
+  const endDrag = () => {
+    if (!dragging) return;
+    dragging = false;
+    deck.classList.remove('is-dragging');
+    pauses.delete('drag');
+    if (Math.abs(dragX) > stack.offsetWidth * 0.2) {
+      advance(Math.sign(dragX));
+    } else {
+      resetDrag(top());
+      schedule();
+    }
+  };
+
+  stack.addEventListener('pointerup', endDrag);
+  stack.addEventListener('pointercancel', endDrag);
+
+  deck.addEventListener('pointerenter', (event) => {
+    if (event.pointerType !== 'mouse') return;
+    pauses.add('hover');
+    schedule();
+  });
+  deck.addEventListener('pointerleave', () => {
+    if (pauses.delete('hover')) schedule();
+  });
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) pauses.add('hidden');
+    else pauses.delete('hidden');
+    schedule();
+  });
+
+  pauses.add('offscreen');
+  new IntersectionObserver(([entry]) => {
+    if (entry.isIntersecting) pauses.delete('offscreen');
+    else pauses.add('offscreen');
+    schedule();
+  }, { threshold: 0.35 }).observe(deck);
+
+  render();
+}
 
 function initCarousel(root) {
   const track = root.querySelector('.carousel-track');

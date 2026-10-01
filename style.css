@@ -145,13 +145,13 @@ body {
 /* Desktop: title sits in the space right of the CTA card, so neither covers the other */
 @media (min-width: 901px) {
   .hero-name {
-    top: 11%;
-    left: calc(clamp(1.5rem, 5vw, 4.5rem) + min(27rem, 36vw) + 3vw);
-    right: 4.5vw;
+    top: 10%;
+    left: calc(clamp(1.5rem, 5vw, 4.5rem) + min(27rem, 36vw) + clamp(2.5rem, 5vw, 4.5rem));
+    right: 4vw;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    font-size: clamp(3rem, 7.2vw, 8.5rem);
+    font-size: clamp(2.6rem, 6.4vw, 7.8rem);
     line-height: 0.9;
     letter-spacing: -0.02em;
     text-align: right;
@@ -772,17 +772,6 @@ html.has-dialog {
 
 .paper-landing .paper-dialog-form .form-field {
   margin-bottom: 1.35rem;
-}
-
-/* Labels on tan paper need darker gray — #888 disappears into the sheet */
-.paper-dialog-form .form-field label,
-.paper-dialog-form .paper-dialog-eyebrow {
-  color: #3f382e;
-}
-
-.paper-dialog-form .form-field input::placeholder,
-.paper-dialog-form .form-field textarea::placeholder {
-  color: rgba(40, 34, 24, 0.45);
 }
 
 @media (max-width: 900px) {

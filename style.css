@@ -348,15 +348,16 @@ body {
   margin: 0;
   font-family: 'Cormorant Galatia', serif;
   font-weight: 300;
-  font-size: clamp(2.4rem, 4vw, 3.6rem);
-  letter-spacing: 0.03em;
-  line-height: 0.98;
+  font-size: clamp(1.85rem, 3.2vw, 2.75rem);
+  letter-spacing: 0.02em;
+  line-height: 1.08;
   text-transform: none;
 }
 
 .hero-cta-title em {
   font-style: italic;
-  padding-left: 1.2em;
+  padding-left: 0;
+  display: inline;
 }
 
 .hero-cta-body {
@@ -1227,7 +1228,7 @@ html {
   }
 
   .hero-cta-title {
-    font-size: 2.1rem;
+    font-size: 1.7rem;
   }
 
   .hero-cta-body {

@@ -151,15 +151,15 @@ function applyMedia() {
   closeModal();
 }
 
-getEl('modal').addEventListener('click', (event) => {
+getEl('modal')?.addEventListener('click', (event) => {
   if (event.target === event.currentTarget) closeModal();
 });
 
 // Close modals and lightbox with Escape key
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') {
-    closeLightbox();
-    closeModal();
+    if (getEl('lightbox')) closeLightbox();
+    if (getEl('modal')) closeModal();
   }
 });
 
@@ -285,6 +285,31 @@ function initContactDialog() {
 function initPartnerLandingForm() {
   bindPaperForm(getEl('partnerContactForm'), {
     required: ['name', 'email', 'brand', 'socials', 'message'],
+  });
+
+  const opener = getEl('partnerFormOpen');
+  const closer = getEl('partnerFormClose');
+  const panel = getEl('partnerFormPanel');
+  if (!opener || !closer || !panel) return;
+
+  const root = document.documentElement;
+  const open = () => {
+    root.classList.add('partner-form-open');
+    panel.scrollTop = 0;
+    closer.focus({ preventScroll: true });
+  };
+  const close = () => {
+    root.classList.remove('partner-form-open');
+    opener.focus({ preventScroll: true });
+  };
+
+  opener.addEventListener('click', open);
+  closer.addEventListener('click', close);
+  panel.addEventListener('click', (event) => {
+    if (event.target === panel) close();
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && root.classList.contains('partner-form-open')) close();
   });
 }
 

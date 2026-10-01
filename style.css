@@ -329,13 +329,24 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
+  text-align: center;
   gap: 1rem;
   width: 100%;
   height: 100%;
   box-sizing: border-box;
   padding: clamp(3.2rem, 6vh, 4.6rem) clamp(2.8rem, 4vw, 3.6rem) clamp(3rem, 5vh, 3.8rem);
   color: var(--black);
+}
+
+.hero-cta-logo {
+  display: block;
+  width: clamp(4.5rem, 8vw, 6.25rem);
+  height: auto;
+  margin: 0 auto 0.35rem;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
 }
 
 .hero-cta-eyebrow {
@@ -356,6 +367,7 @@ body {
   letter-spacing: 0.015em;
   line-height: 1.14;
   text-transform: none;
+  text-align: center;
 }
 
 .hero-cta-title-line {
@@ -377,6 +389,7 @@ body {
   line-height: 1.5;
   letter-spacing: 0.015em;
   color: #444;
+  text-align: center;
 }
 
 .hero-cta-btn {
@@ -1232,6 +1245,11 @@ html {
   .hero-cta-content {
     gap: 0.8rem;
     padding: 2.5rem 2.1rem 2.2rem;
+  }
+
+  .hero-cta-logo {
+    width: 4rem;
+    margin-bottom: 0.15rem;
   }
 
   .hero-cta-title {

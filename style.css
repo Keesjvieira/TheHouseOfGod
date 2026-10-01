@@ -238,6 +238,93 @@ body {
   pointer-events: none;
 }
 
+/* Paper CTA card — right side of hero */
+.hero-cta-card {
+  position: absolute;
+  top: 50%;
+  right: clamp(1.25rem, 4vw, 3.5rem);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.85rem;
+  width: min(18.5rem, 28vw);
+  padding: 1.75rem 1.6rem 1.6rem;
+  background: var(--ivory);
+  color: var(--black);
+  border: 0.5px solid rgba(20, 18, 12, 0.12);
+  box-shadow:
+    0 24px 48px rgba(18, 16, 12, 0.12),
+    0 2px 6px rgba(18, 16, 12, 0.05);
+  transform: translateY(-42%);
+  animation: heroCardIn 1s cubic-bezier(0.22, 1, 0.36, 1) 0.25s both;
+}
+
+.hero-cta-eyebrow {
+  margin: 0;
+  font-size: 0.55rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+
+.hero-cta-title {
+  margin: 0;
+  font-family: 'Cormorant Galatia', serif;
+  font-weight: 300;
+  font-size: clamp(1.35rem, 2vw, 1.75rem);
+  letter-spacing: 0.08em;
+  line-height: 1.15;
+  text-transform: none;
+}
+
+.hero-cta-body {
+  margin: 0;
+  font-family: 'Cormorant Galatia', serif;
+  font-weight: 300;
+  font-style: italic;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  letter-spacing: 0.02em;
+  color: #444;
+}
+
+.hero-cta-btn {
+  margin-top: 0.35rem;
+  font-family: 'Cormorant Galatia', serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  padding: 0.75rem 1.4rem;
+  background: var(--black);
+  color: var(--ivory);
+  border: 0.5px solid var(--black);
+  cursor: pointer;
+  transition: background 0.35s, color 0.35s;
+}
+
+.hero-cta-btn:hover {
+  background: transparent;
+  color: var(--black);
+}
+
+@keyframes heroCardIn {
+  from {
+    opacity: 0;
+    transform: translateY(calc(-42% + 18px));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-42%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-cta-card {
+    animation: none;
+  }
+}
+
 .scroll-hint span {
   font-size: 0.6rem;
   letter-spacing: 0.3em;
@@ -1018,6 +1105,43 @@ html {
     bottom: 6%;
     font-size: 0.58rem;
     padding: 0.7rem 1.8rem;
+  }
+
+  .hero-cta-card {
+    top: auto;
+    bottom: 16%;
+    right: 1.25rem;
+    left: auto;
+    width: min(15.5rem, 72vw);
+    padding: 1.25rem 1.15rem 1.15rem;
+    gap: 0.55rem;
+    transform: none;
+    animation: heroCardInMobile 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+  }
+
+  .hero-cta-title {
+    font-size: 1.2rem;
+  }
+
+  .hero-cta-body {
+    font-size: 0.88rem;
+    line-height: 1.45;
+  }
+
+  .hero-cta-btn {
+    padding: 0.65rem 1.1rem;
+    font-size: 0.55rem;
+  }
+
+  @keyframes heroCardInMobile {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .topnav {

@@ -217,4 +217,13 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+
+  const contactBtn = document.getElementById('scrollToContactBtn');
+  const contact = document.getElementById('contact');
+  if (contactBtn && contact) {
+    contactBtn.addEventListener('click', (event) => {
+      event.preventDefault();
+      contact.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
 });

@@ -369,7 +369,7 @@ body {
 .hero-cta-body {
   margin: 0;
   width: 100%;
-  max-width: 28ch;
+  max-width: none;
   font-family: 'Cormorant Galatia', serif;
   font-weight: 300;
   font-style: italic;
@@ -1242,7 +1242,7 @@ html {
   .hero-cta-body {
     font-size: 0.95rem;
     line-height: 1.45;
-    max-width: 26ch;
+    max-width: none;
   }
 
   .hero-cta-btn {

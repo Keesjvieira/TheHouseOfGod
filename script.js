@@ -353,10 +353,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initContactDialog();
   initPartnerLandingForm();
+  pauseOffscreenMotion();
 
   document.querySelectorAll('.masonry-carousel').forEach(initCarousel);
   document.querySelectorAll('.paper-deck').forEach(initPaperDeck);
 });
+
+function pauseOffscreenMotion() {
+  const targets = [
+    ...document.querySelectorAll('.gallery-row-3--line'),
+    ...document.querySelectorAll('.hero-cta-card'),
+  ];
+  if (!targets.length) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        entry.target.classList.toggle('is-inview', entry.isIntersecting);
+      });
+    },
+    { threshold: 0.12, rootMargin: '10% 0px' }
+  );
+
+  targets.forEach((el) => observer.observe(el));
+}
 
 function initPaperDeck(deck) {
   const stack = deck.querySelector('.paper-deck-stack');

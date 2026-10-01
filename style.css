@@ -601,6 +601,15 @@ html.has-dialog {
   overflow: hidden;
 }
 
+/* While the contact dialog is open, stop expensive page motion behind it */
+html.has-dialog .hero-cta-tilt,
+html.has-dialog .hero-cta-card,
+html.has-dialog .carousel-slide,
+html.has-dialog .gallery-row-3--line .media-card,
+html.has-dialog .paper-deck-progress span {
+  animation: none !important;
+}
+
 @keyframes paperDialogIn {
   0% {
     opacity: 0;
@@ -2057,6 +2066,95 @@ html {
     height: auto;
     transform: translateX(-50%);
     animation: heroCardInMobile 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+  }
+
+  /* Contact popup: centered, and lighter so typing stays responsive */
+  .paper-dialog {
+    padding: 1.25rem 1rem;
+    place-items: center;
+  }
+
+  .paper-dialog[open] {
+    display: grid;
+    place-items: center;
+    justify-items: center;
+    align-items: center;
+  }
+
+  .paper-dialog::backdrop {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(24, 20, 14, 0.55);
+    animation: none;
+  }
+
+  .paper-dialog-card {
+    width: min(22rem, 92vw);
+    margin-inline: auto;
+    filter: none;
+    box-shadow: 0 22px 36px rgba(18, 16, 12, 0.28);
+    animation: paperDialogInMobile 0.32s ease both;
+  }
+
+  .paper-dialog.is-closing .paper-dialog-card {
+    animation: paperDialogOutMobile 0.22s ease both;
+  }
+
+  /* SVG torn-edge filters are expensive on phones; keep the tan look without them */
+  .paper-dialog-card .hero-cta-layer--back,
+  .paper-dialog-card .hero-cta-layer--fibre,
+  .paper-dialog-card .hero-cta-layer--sheet {
+    filter: none;
+  }
+
+  .paper-dialog-card .hero-cta-layer--back {
+    inset: 3% 2% -2% 2%;
+    transform: rotate(1.5deg);
+  }
+
+  .paper-dialog-card .hero-cta-layer--fibre {
+    inset: -0.6%;
+  }
+
+  .paper-dialog-card .hero-cta-tape {
+    backdrop-filter: none;
+  }
+
+  .paper-dialog-form {
+    padding: 2.6rem 1.6rem 2.2rem;
+  }
+
+  .paper-dialog-title {
+    margin-bottom: 1.6rem;
+    font-size: 1.45rem;
+  }
+
+  .paper-dialog-form .form-field {
+    margin-bottom: 1.2rem;
+  }
+
+  .paper-dialog-form .form-field input,
+  .paper-dialog-form .form-field textarea {
+    font-size: 16px; /* avoids iOS zoom + layout thrash on focus */
+  }
+
+  @keyframes paperDialogInMobile {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes paperDialogOutMobile {
+    to {
+      opacity: 0;
+      transform: translateY(12px);
+    }
   }
 
   .hero-cta-tilt {

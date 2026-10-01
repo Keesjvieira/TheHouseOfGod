@@ -243,14 +243,15 @@ function initContactDialog() {
   if (!dialog || !opener || !form || typeof dialog.showModal !== 'function') return;
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isCoarse = window.matchMedia('(pointer: coarse)').matches || window.innerWidth <= 900;
   const nameField = getEl('pf-name');
+  const closeMs = reduceMotion ? 0 : isCoarse ? 220 : 340;
 
   const open = () => {
     dialog.classList.remove('is-closing');
     form.classList.remove('is-sent');
-    dialog.showModal();
     document.documentElement.classList.add('has-dialog');
-    if (window.matchMedia('(pointer: fine)').matches) nameField?.focus();
+    dialog.showModal();
   };
 
   const close = () => {
@@ -260,8 +261,8 @@ function initContactDialog() {
       dialog.close();
       dialog.classList.remove('is-closing');
       document.documentElement.classList.remove('has-dialog');
-      opener.focus({ preventScroll: true });
-    }, reduceMotion ? 0 : 340);
+      if (!isCoarse) opener.focus({ preventScroll: true });
+    }, closeMs);
   };
 
   opener.addEventListener('click', (event) => {

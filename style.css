@@ -964,12 +964,10 @@ section {
     animation-delay: -2.2s;
   }
 
-  .gallery-row-3--line .media-card img {
-    margin-top: -0.9rem;
-  }
-
+  /* --garment-top: empty space above the garment inside its image */
+  .gallery-row-3--line .media-card img,
   .gallery-row-3--line .media-card:hover img {
-    transform: none;
+    transform: translateY(calc(0.6rem - var(--garment-top, 10.7%)));
   }
 
   .gallery-row-3--line .media-card:hover {

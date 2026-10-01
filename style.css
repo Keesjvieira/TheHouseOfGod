@@ -413,6 +413,218 @@ body {
   transform: translateY(-2px);
 }
 
+/* Contact form on a torn paper sheet, opened over the page */
+.paper-dialog {
+  position: fixed;
+  inset: 0;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  margin: 0;
+  padding: 2.5rem 1.6rem;
+  border: none;
+  background: transparent;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.paper-dialog[open] {
+  display: grid;
+  place-items: center;
+}
+
+.paper-dialog::backdrop {
+  background: rgba(24, 20, 14, 0.42);
+  backdrop-filter: blur(6px);
+  animation: paperBackdropIn 0.45s ease both;
+}
+
+.paper-dialog.is-closing::backdrop {
+  animation: paperBackdropOut 0.35s ease both;
+}
+
+.paper-dialog-card {
+  position: relative;
+  width: min(32rem, 100%);
+  filter:
+    drop-shadow(0 40px 46px rgba(18, 16, 12, 0.3))
+    drop-shadow(0 6px 10px rgba(18, 16, 12, 0.12));
+  animation: paperDialogIn 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.paper-dialog.is-closing .paper-dialog-card {
+  animation: paperDialogOut 0.35s cubic-bezier(0.55, 0, 0.75, 0.35) both;
+}
+
+.paper-dialog-card .hero-cta-layer--back {
+  transform: rotate(3deg);
+}
+
+.paper-dialog-close {
+  position: absolute;
+  top: 1.4rem;
+  right: 1.4rem;
+  z-index: 3;
+  width: 2.2rem;
+  height: 2.2rem;
+  padding: 0;
+  border: 0.5px solid rgba(10, 10, 10, 0.35);
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.4s;
+}
+
+.paper-dialog-close::before,
+.paper-dialog-close::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0.85rem;
+  height: 1px;
+  background: var(--black);
+  transform: translate(-50%, -50%) rotate(45deg);
+  transition: background 0.3s;
+}
+
+.paper-dialog-close::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.paper-dialog-close:hover,
+.paper-dialog-close:focus-visible {
+  background: var(--black);
+  transform: rotate(90deg);
+}
+
+.paper-dialog-close:hover::before,
+.paper-dialog-close:hover::after,
+.paper-dialog-close:focus-visible::before,
+.paper-dialog-close:focus-visible::after {
+  background: var(--ivory);
+}
+
+.paper-dialog-form {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(3.2rem, 7vh, 4.2rem) clamp(1.8rem, 6vw, 3.4rem) clamp(2.6rem, 6vh, 3.4rem);
+}
+
+.paper-dialog-eyebrow {
+  margin: 0 0 0.9rem;
+  font-size: 0.58rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gray);
+  text-align: center;
+}
+
+.paper-dialog-title {
+  margin: 0 0 2.4rem;
+  font-family: 'Cormorant Galatia', serif;
+  font-weight: 300;
+  font-size: clamp(1.6rem, 4.5vw, 2.2rem);
+  line-height: 1.15;
+  text-align: center;
+  color: var(--black);
+}
+
+.paper-dialog-title em {
+  display: block;
+}
+
+.paper-dialog-form .form-field {
+  margin-bottom: 1.6rem;
+}
+
+.paper-dialog-form .form-field.is-invalid input,
+.paper-dialog-form .form-field.is-invalid textarea {
+  border-bottom-color: #a8322a;
+}
+
+.paper-dialog-submit {
+  align-self: center;
+  min-width: 11rem;
+}
+
+.paper-dialog-submit:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.paper-dialog-confirm {
+  display: none;
+  margin: 1.4rem 0 0;
+  font-family: 'Cormorant Galatia', serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  text-align: center;
+  color: #444;
+}
+
+.paper-dialog-form.is-sent .paper-dialog-confirm {
+  display: block;
+}
+
+.paper-dialog-form.is-sent .paper-dialog-submit {
+  display: none;
+}
+
+html.has-dialog {
+  overflow: hidden;
+}
+
+@keyframes paperDialogIn {
+  0% {
+    opacity: 0;
+    transform: translateY(70px) scale(0.92) rotate(-6deg);
+  }
+
+  60% {
+    opacity: 1;
+    transform: translateY(-6px) scale(1.01) rotate(0.6deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(-1deg);
+  }
+}
+
+@keyframes paperDialogOut {
+  to {
+    opacity: 0;
+    transform: translateY(50px) scale(0.94) rotate(4deg);
+  }
+}
+
+@keyframes paperBackdropIn {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes paperBackdropOut {
+  to {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .paper-dialog-card,
+  .paper-dialog.is-closing .paper-dialog-card,
+  .paper-dialog::backdrop,
+  .paper-dialog.is-closing::backdrop {
+    animation-duration: 0.01s;
+  }
+}
+
 @keyframes heroCardIn {
   0% {
     opacity: 0;

@@ -170,6 +170,88 @@ window.addEventListener('resize', () => {
   }
 });
 
+function sendContactEmail(name, email, message) {
+  return emailjs.send('service_brzdfxr', 'template_ityk0dw', { name, email, message });
+}
+
+function initContactDialog() {
+  const dialog = getEl('contactDialog');
+  const opener = getEl('scrollToContactBtn');
+  const form = getEl('paperContactForm');
+  if (!dialog || !opener || !form || typeof dialog.showModal !== 'function') return;
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const submit = form.querySelector('.paper-dialog-submit');
+  const fields = {
+    name: getEl('pf-name'),
+    email: getEl('pf-email'),
+    message: getEl('pf-message'),
+  };
+
+  const open = () => {
+    dialog.classList.remove('is-closing');
+    form.classList.remove('is-sent');
+    dialog.showModal();
+    document.documentElement.classList.add('has-dialog');
+    if (window.matchMedia('(pointer: fine)').matches) fields.name.focus();
+  };
+
+  const close = () => {
+    if (!dialog.open || dialog.classList.contains('is-closing')) return;
+    dialog.classList.add('is-closing');
+    setTimeout(() => {
+      dialog.close();
+      dialog.classList.remove('is-closing');
+      document.documentElement.classList.remove('has-dialog');
+      opener.focus({ preventScroll: true });
+    }, reduceMotion ? 0 : 340);
+  };
+
+  opener.addEventListener('click', (event) => {
+    event.preventDefault();
+    open();
+  });
+
+  dialog.addEventListener('cancel', (event) => {
+    event.preventDefault();
+    close();
+  });
+
+  dialog.addEventListener('click', (event) => {
+    if (event.target === dialog || event.target.closest('[data-close-dialog]')) close();
+  });
+
+  Object.values(fields).forEach((field) =>
+    field.addEventListener('input', () => field.closest('.form-field').classList.remove('is-invalid'))
+  );
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const invalid = Object.values(fields).filter((field) => !field.value.trim() || !field.checkValidity());
+    invalid.forEach((field) => field.closest('.form-field').classList.add('is-invalid'));
+    if (invalid.length) {
+      invalid[0].focus();
+      return;
+    }
+
+    submit.disabled = true;
+    submit.textContent = 'Sending…';
+    sendContactEmail(fields.name.value.trim(), fields.email.value.trim(), fields.message.value.trim())
+      .then(() => {
+        form.classList.add('is-sent');
+        form.reset();
+      })
+      .catch((err) => {
+        console.error(err);
+        alert('Something went wrong. Please try again.');
+      })
+      .finally(() => {
+        submit.disabled = false;
+        submit.textContent = 'Send';
+      });
+  });
+}
+
 function submitContact() {
   const name  = document.getElementById('cf-name').value.trim();
   const email = document.getElementById('cf-email').value.trim();
@@ -185,11 +267,7 @@ function submitContact() {
   btn.style.opacity = '0.6';
   btn.disabled = true;
 
-  emailjs.send('service_brzdfxr', 'template_ityk0dw', {
-    name: name,
-    email: email,
-    message: msg
-  }).then(() => {
+  sendContactEmail(name, email, msg).then(() => {
     document.getElementById('cf-confirm').style.display = 'block';
     btn.style.display = 'none';
   }).catch((err) => {
@@ -237,14 +315,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  const contactBtn = document.getElementById('scrollToContactBtn');
-  const contact = document.getElementById('contact');
-  if (contactBtn && contact) {
-    contactBtn.addEventListener('click', (event) => {
-      event.preventDefault();
-      contact.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-  }
+  initContactDialog();
 
   document.querySelectorAll('.masonry-carousel').forEach(initCarousel);
   document.querySelectorAll('.paper-deck').forEach(initPaperDeck);

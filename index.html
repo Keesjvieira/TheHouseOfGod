@@ -411,6 +411,37 @@
       </div>
     </div>
 
+    <dialog class="paper-dialog" id="contactDialog" aria-labelledby="paperDialogTitle">
+      <div class="paper-dialog-card">
+        <span class="hero-cta-layer hero-cta-layer--back" aria-hidden="true"></span>
+        <span class="hero-cta-layer hero-cta-layer--fibre" aria-hidden="true"></span>
+        <span class="hero-cta-layer hero-cta-layer--sheet" aria-hidden="true"></span>
+        <span class="hero-cta-tape" aria-hidden="true"></span>
+        <button type="button" class="paper-dialog-close" aria-label="Close" data-close-dialog></button>
+
+        <form class="paper-dialog-form" id="paperContactForm" novalidate>
+          <p class="paper-dialog-eyebrow">Get in touch</p>
+          <h2 class="paper-dialog-title" id="paperDialogTitle">Let's make something <em>worth wearing</em></h2>
+
+          <div class="form-field">
+            <label for="pf-name">Your Name</label>
+            <input type="text" placeholder="Full name" id="pf-name" autocomplete="name" required />
+          </div>
+          <div class="form-field">
+            <label for="pf-email">Email Address</label>
+            <input type="email" placeholder="your@email.com" id="pf-email" autocomplete="email" required />
+          </div>
+          <div class="form-field">
+            <label for="pf-message">Message</label>
+            <textarea rows="4" placeholder="Tell me, what's on your mind?" id="pf-message" required></textarea>
+          </div>
+
+          <button type="submit" class="hero-cta-btn paper-dialog-submit">Send</button>
+          <p class="paper-dialog-confirm" role="status">Thank you — your message has been received. I will be in touch.</p>
+        </form>
+      </div>
+    </dialog>
+
     <!--Contact form-->
 <section class="contact-section" id="contact">
   <p class="contact-eyebrow">Get in touch</p>

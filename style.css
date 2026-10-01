@@ -142,6 +142,75 @@ body {
   font-family: 'satoshi', sans-serif;
 }
 
+/* Desktop: title sits in the space right of the CTA card, so neither covers the other */
+@media (min-width: 901px) {
+  .hero-name {
+    top: 11%;
+    left: calc(clamp(1.5rem, 5vw, 4.5rem) + min(27rem, 36vw) + 3vw);
+    right: 4.5vw;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-size: clamp(3rem, 7.2vw, 8.5rem);
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    text-align: right;
+  }
+
+  .hero-name-line {
+    display: block;
+    white-space: nowrap;
+    animation: heroNameIn 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .hero-name-line:nth-child(1) {
+    animation-delay: 0.35s;
+  }
+
+  .hero-name-line:nth-child(2) {
+    margin-right: -0.04em;
+    animation-delay: 0.5s;
+  }
+
+  .hero-name::after {
+    content: '';
+    display: block;
+    width: 32%;
+    height: 2px;
+    margin-top: 0.22em;
+    background: var(--black);
+    transform-origin: right;
+    animation: heroNameRule 0.9s cubic-bezier(0.65, 0, 0.35, 1) 0.95s both;
+  }
+}
+
+@keyframes heroNameIn {
+  from {
+    opacity: 0;
+    transform: translateX(0.6em);
+    clip-path: inset(0 0 0 100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes heroNameRule {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-name-line,
+  .hero-name::after {
+    animation: none;
+  }
+}
+
 .hero-sub {
   position: static;
   display: block;

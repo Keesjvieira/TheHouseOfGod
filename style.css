@@ -737,6 +737,15 @@ html.has-dialog .paper-deck-progress span {
 @media (max-width: 900px) {
   .paper-landing {
     background: var(--ivory);
+    overflow-x: hidden;
+    overscroll-behavior-x: none;
+    touch-action: pan-y;
+  }
+
+  .paper-landing,
+  .paper-landing * {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
 
   .paper-landing-brand {
@@ -745,6 +754,12 @@ html.has-dialog .paper-deck-progress span {
 
   .paper-landing-card {
     width: min(34rem, 94vw);
+  }
+
+  /* Soft light gray reads clearly on the tan sheet; mid-gray (#888) blends into it */
+  .paper-landing .paper-dialog-form .form-field label,
+  .paper-landing .paper-dialog-form .paper-dialog-eyebrow {
+    color: #f7f3ea;
   }
 
   .partner-intro {
@@ -895,8 +910,11 @@ html.has-dialog .paper-deck-progress span {
     z-index: 50;
     display: none;
     padding: 4.5rem 0.75rem 3rem;
+    overflow-x: hidden;
     overflow-y: auto;
+    overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
     background: rgba(24, 20, 14, 0.68);
   }
 

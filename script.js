@@ -282,7 +282,106 @@ function initContactDialog() {
   bindPaperForm(form, { required: ['name', 'email', 'message'] });
 }
 
+function scatterPartnerTiles() {
+  const intro = document.querySelector('.partner-intro');
+  const layer = getEl('partnerScatter');
+  if (!intro || !layer || getComputedStyle(intro).display === 'none') return;
+
+  const box = intro.getBoundingClientRect();
+  const W = box.width;
+  const H = box.height;
+  const local = (el, padX, padY = padX) => {
+    const r = el.getBoundingClientRect();
+    return { l: r.left - box.left - padX, t: r.top - box.top - padY, r: r.right - box.left + padX, b: r.bottom - box.top + padY };
+  };
+
+  const title = local(intro.querySelector('.partner-intro-title'), 0, 0);
+  const inset = (title.r - title.l) * 0.18;
+  const obstacles = [
+    { l: title.l + inset, t: title.t, r: title.r - inset, b: title.b },
+    local(intro.querySelector('.partner-intro-copy .partner-intro-mark'), 10),
+    local(intro.querySelector('.partner-intro-line'), 18, 10),
+    local(getEl('partnerFormOpen'), 12),
+  ];
+
+  const tiles = [...layer.querySelectorAll('.partner-tile')];
+  for (let i = tiles.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [tiles[i], tiles[j]] = [tiles[j], tiles[i]];
+  }
+
+  const gap = 6;
+  const placed = [];
+  const hits = (a, b) => a.l < b.r && a.r > b.l && a.t < b.b && a.b > b.t;
+
+  tiles.forEach((tile) => {
+    tile.hidden = false;
+    let scale = 0.9 + Math.random() * 0.2;
+    for (let attempt = 0; attempt < 5; attempt++, scale *= 0.88) {
+      tile.style.setProperty('--s', scale.toFixed(3));
+      const w = tile.offsetWidth;
+      const h = tile.offsetHeight;
+      let best = null;
+      let bestScore = -1;
+      let valid = 0;
+
+      for (let k = 0; k < 700 && valid < 60; k++) {
+        const rot = (Math.random() * 2 - 1) * 16;
+        const rad = (Math.abs(rot) * Math.PI) / 180;
+        const bw = w * Math.cos(rad) + h * Math.sin(rad);
+        const bh = w * Math.sin(rad) + h * Math.cos(rad);
+        const cx = bw * 0.42 + Math.random() * (W - bw * 0.84);
+        const cy = bh * 0.5 + 6 + Math.random() * (H - bh - 12);
+        const rect = { l: cx - bw / 2 - gap, t: cy - bh / 2 - gap, r: cx + bw / 2 + gap, b: cy + bh / 2 + gap };
+        if (obstacles.some((o) => hits(rect, o)) || placed.some((p) => hits(rect, p.rect))) continue;
+        valid++;
+        const score = placed.length
+          ? Math.min(...placed.map((p) => Math.hypot(p.cx - cx, p.cy - cy)))
+          : Math.random();
+        if (score > bestScore) {
+          bestScore = score;
+          best = { cx, cy, rot, rect };
+        }
+      }
+
+      if (best) {
+        placed.push(best);
+        tile.style.setProperty('--x', `${(best.cx - w / 2).toFixed(1)}px`);
+        tile.style.setProperty('--y', `${(best.cy - h / 2).toFixed(1)}px`);
+        tile.style.setProperty('--r', `${best.rot.toFixed(1)}deg`);
+        return;
+      }
+    }
+    tile.hidden = true;
+  });
+}
+
+function initPartnerScatter() {
+  if (!getEl('partnerScatter')) return;
+  let lastWidth = 0;
+  const run = () => {
+    if (window.innerWidth === lastWidth) return;
+    lastWidth = window.innerWidth;
+    scatterPartnerTiles();
+  };
+  run();
+  const relayout = () => {
+    lastWidth = 0;
+    run();
+  };
+  if (document.fonts?.ready) {
+    Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 400))]).then(relayout);
+  }
+  let timer;
+  window.addEventListener('resize', () => {
+    clearTimeout(timer);
+    timer = setTimeout(run, 150);
+  });
+}
+
 function initPartnerLandingForm() {
+  initPartnerScatter();
+
   bindPaperForm(getEl('partnerContactForm'), {
     required: ['name', 'email', 'brand', 'socials', 'message'],
   });
